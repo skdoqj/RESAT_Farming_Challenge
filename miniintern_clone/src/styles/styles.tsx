@@ -1,4 +1,5 @@
 import { createGlobalStyle, styled } from "styled-components";
+const themeColor = "rgb(23, 161, 255)";
 
 export const GlobalStyle = createGlobalStyle`
 * {
@@ -30,9 +31,11 @@ export const Header = styled.div`
 
   border-bottom: 1px solid rgba(104, 104, 104, 0.1);
   font-size: 16px;
-  .nav {
+  white-space: nowrap;
+  header {
     display: flex;
     align-items: center;
+    width: 100%;
   }
 
   .logo {
@@ -46,7 +49,7 @@ export const Header = styled.div`
     padding-left: 20px;
   }
   li {
-    padding: 5px;
+    padding: 20px;
   }
 
   .right_container {
@@ -59,6 +62,10 @@ export const Header = styled.div`
   }
   .right_container > div {
     padding: 10px;
+  }
+  .sign_in,
+  .log_in {
+    color: ${themeColor};
   }
 `;
 

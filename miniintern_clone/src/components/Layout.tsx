@@ -5,7 +5,7 @@ function Layout() {
   return (
     <>
       <S.Header>
-        <div className="nav">
+        <header>
           <div className="logo">
             <a href="/">miniintern</a>
           </div>
@@ -24,10 +24,10 @@ function Layout() {
           </ul>
           <div className="right_container">
             <div>서비스 소개</div>
-            <div>알람</div>
-            <div>로그인</div>
+            <div className="sign_in">회원가입</div>
+            <div className="log_in">로그인</div>
           </div>
-        </div>
+        </header>
       </S.Header>
 
       <Outlet />
