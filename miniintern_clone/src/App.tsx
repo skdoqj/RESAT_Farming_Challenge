@@ -6,11 +6,13 @@ import {
   Link,
 } from "react-router-dom";
 import Main from "./pages/MainPage";
-import Header from "./components/Header";
+import Layout from "./components/Layout";
+
+import { GlobalStyle } from "./styles/styles";
 
 const router = createBrowserRouter([
   {
-    element: <Header />,
+    element: <Layout />,
     children: [
       {
         path: "/",
@@ -21,7 +23,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <GlobalStyle />
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;
