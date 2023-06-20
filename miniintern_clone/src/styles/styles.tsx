@@ -61,3 +61,24 @@ export const Header = styled.div`
     padding: 10px;
   }
 `;
+
+export const Footer = styled.div`
+  bottom: 0;
+  height: 200px;
+  border-top: 1px solid rgba(104, 104, 104, 0.1);
+
+  footer {
+    padding: 20px;
+  }
+  footer .name {
+    font-size: 30px;
+    font-weight: 300;
+  }
+
+  footer .email {
+    font-weight: 400;
+  }
+  footer img {
+    height: 50px;
+  }
+`;

@@ -31,6 +31,15 @@ function Layout() {
       </S.Header>
 
       <Outlet />
+      <S.Footer>
+        <footer>
+          <div className="name">SUWAN</div>
+          <a href="https://github.com/skdoqj/RESAT_Farming_Challenge">
+            <img src="https://velog.velcdn.com/images/persestitan/post/5ef6f63a-c279-465d-b65d-97ff39848f6c/image.jpeg" />
+          </a>
+          <div className="email">Email: skdoqj@gmail.com</div>
+        </footer>
+      </S.Footer>
     </>
   );
 }
