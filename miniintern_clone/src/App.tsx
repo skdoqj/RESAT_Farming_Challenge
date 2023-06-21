@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Main from "./pages/MainPage";
 import Layout from "./components/Layout";
+import Timer from "./pages/TimerPage";
 
 import { GlobalStyle } from "./styles/styles";
 
@@ -17,7 +18,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Main />,
-      },
+      }, {
+        path: "/timer",
+        element: <Timer />
+      }
     ],
   },
 ]);
