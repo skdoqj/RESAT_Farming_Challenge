@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const Todo = styled.div`
-  .todo_enter {
+  .todo_page input {
     border: 1px solid gray;
   }
 
