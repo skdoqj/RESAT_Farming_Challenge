@@ -18,8 +18,12 @@ function Layout() {
             <li>
               <a href="/">2일차</a>
             </li>
-            <li><a href="/timer">3일차 타이머</a></li>
-            <li>4일차</li>
+            <li>
+              <a href="/timer">3일차 타이머</a>
+            </li>
+            <li>
+              <a href="/todo">4일차 투두</a>
+            </li>
             <li>5일차</li>
           </ul>
           <div className="right_container">
