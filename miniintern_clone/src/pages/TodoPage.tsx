@@ -9,6 +9,7 @@ function Todo() {
   const [enterTodo, setEnterTodo] = useState("");
   const [importance, setImportance] = useState("");
   const [localList, setLocalList] = useState<TodoType[]>([]);
+  const [check, setCheck] = useState<null | boolean>();
 
   const createTodo = () => {
     console.log("입력값", enterTodo);
@@ -36,6 +37,16 @@ function Todo() {
     console.log("get", localList);
   };
 
+  // 완료여부
+  let TodoList: TodoType[];
+  if (check === true) {
+    TodoList = localList.filter((v) => v.cheked === true);
+  } else if (check === false) {
+    TodoList = localList.filter((v) => v.cheked === false);
+  } else {
+    TodoList = localList;
+  }
+
   useEffect(() => {
     getLocalTodoList();
     // localStorage.clear();
@@ -46,11 +57,12 @@ function Todo() {
       <div className="todo_page">
         <h1>ToDo List</h1>
         <div className="option">
-          <button>전체</button>
-          <button>해결</button>
-          <button>미해결</button>
+          <button onClick={() => setCheck(null)}>전체</button>
+          <button onClick={() => setCheck(true)}>해결</button>
+          <button onClick={() => setCheck(false)}>미해결</button>
         </div>
         <div className="input_array">
+          <label>할 일을 입력하세요</label>
           <input
             type="text"
             onChange={(e) => setEnterTodo(e.target.value)}
@@ -68,7 +80,7 @@ function Todo() {
         </div>
         <S.Todo>
           <ul className="todo_list">
-            {localList.map((todo: TodoType) => (
+            {TodoList.map((todo: TodoType) => (
               <TodoContent
                 todo={todo}
                 key={todo.key}
