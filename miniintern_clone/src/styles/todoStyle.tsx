@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const Todo = styled.div`
+export const TodoForm = styled.div`
   .todo_page input {
     border: 1px solid gray;
   }
@@ -16,7 +16,6 @@ export const Todo = styled.div`
   .todo_content {
     display: flex;
     justify-content: center;
-    /* width: 300px; */
     align-items: center;
   }
   .todo_content button {
@@ -24,3 +23,5 @@ export const Todo = styled.div`
     margin: 5px;
   }
 `;
+
+export const Todo = styled.div``;

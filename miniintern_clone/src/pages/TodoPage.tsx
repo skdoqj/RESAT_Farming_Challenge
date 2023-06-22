@@ -1,20 +1,14 @@
 import { useEffect, useState } from "react";
 import * as S from "../styles/todoStyle";
-const KEY = "todoList";
+import { TodoType } from "../types/todo";
+import TodoContent from "../components/TodoContent";
 
-interface TodoType {
-  key: number;
-  value: string;
-  중요도: string;
-  cheked: boolean;
-}
+const KEY = "todoList";
 
 function Todo() {
   const [enterTodo, setEnterTodo] = useState("");
-  const [todoList, setTodoList] = useState([]);
   const [importance, setImportance] = useState("");
   const [localList, setLocalList] = useState<TodoType[]>([]);
-  const [modifying, setModifying] = useState(false);
 
   const createTodo = () => {
     console.log("입력값", enterTodo);
@@ -42,31 +36,13 @@ function Todo() {
     console.log("get", localList);
   };
 
-  //삭제
-  const deleteTodo = (key: number) => {
-    const newList = localList.filter((v) => v.key !== key);
-    localStorage.setItem(KEY, JSON.stringify(newList));
-    getLocalTodoList();
-  };
-
-  //수정
-  const modifyTodo = (key: number) => {
-    console.log(key);
-    setModifying(true);
-  };
-  const modifyingDone = () => {
-    setModifying(false);
-  };
-
   useEffect(() => {
     getLocalTodoList();
     // localStorage.clear();
   }, []);
 
-  const onCheck = () => {};
-
   return (
-    <S.Todo>
+    <S.TodoForm>
       <div className="todo_page">
         <h1>ToDo List</h1>
         <div className="option">
@@ -83,61 +59,27 @@ function Todo() {
           ></input>
           <select name="중요도" onChange={(e) => setImportance(e.target.value)}>
             <option value="">중요도</option>
-            <option value="높음">낮음</option>
-            <option value="높음">보통</option>
+            <option value="낮음">낮음</option>
+            <option value="보통">보통</option>
             <option value="높음">높음</option>
-            <option value="높음">아주높음</option>
+            <option value="아주높음">아주높음</option>
           </select>
           <button onClick={createTodo}>추가</button>
         </div>
-
-        <ul className="todo_list">
-          {localList.map((todo: TodoType) => (
-            <li key={todo.key} className="todo_content">
-              <div>
-                <input
-                  type="checkbox"
-                  checked={todo.cheked}
-                  onChange={onCheck}
-                ></input>
-
-                {modifying ? (
-                  <>
-                    <input type="text"></input>
-                    <select
-                      name="중요도"
-                      onChange={(e) => setImportance(e.target.value)}
-                    >
-                      <option value="">중요도</option>
-                      <option value="높음">낮음</option>
-                      <option value="높음">보통</option>
-                      <option value="높음">높음</option>
-                      <option value="높음">아주높음</option>
-                    </select>
-                    <button onClick={modifyingDone}>수정완료</button>
-                  </>
-                ) : (
-                  <>
-                    <div>
-                      <span>{todo.value}</span>
-                      <span>{todo.중요도}</span>
-                      <div className="ud">
-                        <button onClick={() => modifyTodo(todo.key)}>
-                          수정
-                        </button>
-                        <button onClick={() => deleteTodo(todo.key)}>
-                          삭제
-                        </button>
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
-            </li>
-          ))}
-        </ul>
+        <S.Todo>
+          <ul className="todo_list">
+            {localList.map((todo: TodoType) => (
+              <TodoContent
+                todo={todo}
+                key={todo.key}
+                getLocalTodoList={getLocalTodoList}
+                localList={localList}
+              ></TodoContent>
+            ))}
+          </ul>
+        </S.Todo>
       </div>
-    </S.Todo>
+    </S.TodoForm>
   );
 }
 export default Todo;
