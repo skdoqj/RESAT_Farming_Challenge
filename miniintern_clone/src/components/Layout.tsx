@@ -24,7 +24,9 @@ function Layout() {
             <li>
               <a href="/todo">4일차 투두</a>
             </li>
-            <li>5일차</li>
+            <li>
+              <a href="/calender">5일차 캘린더</a>
+            </li>
           </ul>
           <div className="right_container">
             <div>서비스 소개</div>

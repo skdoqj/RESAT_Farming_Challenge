@@ -5,12 +5,12 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import { GlobalStyle } from "./styles/styles";
 import Main from "./pages/MainPage";
 import Layout from "./components/Layout";
 import Timer from "./pages/TimerPage";
 import Todo from "./pages/TodoPage";
-
-import { GlobalStyle } from "./styles/styles";
+import Calender from "./pages/CalenderPage";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/todo",
         element: <Todo />,
+      },
+      {
+        path: "/calender",
+        element: <Calender />,
       },
     ],
   },
