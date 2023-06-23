@@ -4,9 +4,11 @@ interface Props {
 }
 
 function CalenderBody({ lastDate, firstDay }: Props) {
-  let dateArry = [];
-  const makeCalender = () => {};
+  //   let dateArry = [];
+  //   const makeCalender = () => {
 
-  return <>1 2 3</>;
+  //   };
+
+  return <></>;
 }
 export default CalenderBody;

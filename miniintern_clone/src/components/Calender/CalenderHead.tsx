@@ -1,4 +1,4 @@
 function CalenderHead() {
-  return <>월화수목</>;
+  return <></>;
 }
 export default CalenderHead;
