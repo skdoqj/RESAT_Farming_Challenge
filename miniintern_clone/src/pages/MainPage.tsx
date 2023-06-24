@@ -1,5 +1,11 @@
 import * as S from "../styles/mainStyle";
-import { ImageCard, LogoCard } from "../components/card";
+import { ImageCard, LogoCard } from "../components/mainCard/card";
+import {
+  internArray,
+  companyArray,
+  mClassArray,
+  hFolioArray,
+} from "../components/MainModule";
 
 function Main() {
   return (
@@ -27,7 +33,7 @@ function Main() {
               </div>
             </section>
 
-            <section className="assignment">
+            <section className="intership">
               <h1>미니인턴으로 취업하세요</h1>
               <div className="text_bottom">
                 <h2>
@@ -36,7 +42,15 @@ function Main() {
                 </h2>
                 <div className="go">모든 기업과제 보기</div>
               </div>
-              <ImageCard></ImageCard>
+              {internArray.map((v) => (
+                <ImageCard
+                  section={v.section}
+                  title={v.title}
+                  tag={v.tag}
+                  img={v.img}
+                  day={v.day}
+                ></ImageCard>
+              ))}
             </section>
 
             <section className="slide_banner">
@@ -58,7 +72,19 @@ function Main() {
                 <h2>내게 맞는 기업을 찾았나요? 바로 지원해 보세요</h2>
                 <div className="go">모든 채용정보 보기</div>
               </div>
-              <LogoCard></LogoCard>
+              {companyArray.map((v) =>
+                v.sub === undefined ? (
+                  ""
+                ) : (
+                  <LogoCard
+                    section={v.section}
+                    title={v.title}
+                    tag={v.tag}
+                    img={v.img}
+                    sub={v.sub}
+                  ></LogoCard>
+                )
+              )}
             </section>
             <section className="bottom_banner">
               <div className="banner">
@@ -76,7 +102,17 @@ function Main() {
                 <h2>미니인턴만의 색깔을 가진 교육을 제공해 드려요</h2>
                 <div className="go">모든 M클래스 보기</div>
               </div>
-              <ImageCard></ImageCard>
+              {mClassArray.map((v) => (
+                <ImageCard
+                  section={v.section}
+                  title={v.title}
+                  tag={v.tag}
+                  img={v.img}
+                  day={v.day}
+                  sub={v.sub}
+                  payment={v.payment}
+                ></ImageCard>
+              ))}
             </section>
             <section className="happy_folio">
               <h1>해피폴리오로 취업 정보를 받으세요</h1>
@@ -85,7 +121,7 @@ function Main() {
                 <h2>검증된 현직자의 취업 스토리로 취준 전략을 세우세요</h2>
                 <div className="go">모든 해피폴리오 보기</div>
               </div>
-              <ImageCard></ImageCard>
+              {/* <ImageCard></ImageCard> */}
             </section>
           </main>
         </S.Banner>
