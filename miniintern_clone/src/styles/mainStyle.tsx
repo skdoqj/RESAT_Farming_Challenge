@@ -160,3 +160,15 @@ export const Banner = styled.div`
     border-radius: 30px;
   }
 `;
+
+export const CardSpace = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+`;
+
+export const LogoCardSpace = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+`;

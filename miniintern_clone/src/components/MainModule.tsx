@@ -17,7 +17,7 @@ export let internArray: company[] = [];
 
 const I1 = new company(
   "intership",
-  "동남아시아 시장에",
+  "동남아시아 시장에 마이크로니들패치 판매를 위한 '활용 가능한' 온라인 마케팅 전략 제안",
   "마케팅",
   "https://miniintern-upload.s3.ap-northeast-2.amazonaws.com/35850/c01b2e9e-7d99-4ae4-8b20-33999cd81216/%EC%A0%9C%EB%8B%88%EB%9F%AD%EC%8A%A4%EB%AF%B8%EB%8B%88%EC%9D%B8%ED%84%B4%EB%9E%9C%EB%94%A9%ED%8E%98%EC%9D%B4%EC%A7%80%EC%BB%A4%EB%B2%84%EC%9D%B4%EB%AF%B8%EC%A7%80.png",
   "D-16"

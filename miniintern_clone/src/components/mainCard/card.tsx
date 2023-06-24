@@ -18,6 +18,8 @@ function ImageCard({
         <div className="top_img">
           <img className="cardImg" src={img}></img>
         </div>
+        {payment ? <div className="payment">{payment}</div> : ""}
+
         <div className="bottom">
           {section === "intership" ? (
             <InternshipCard day={day} tag={tag} title={title}></InternshipCard>
@@ -25,13 +27,14 @@ function ImageCard({
             ""
           )}
           {section === "m_class" ? (
-            <MClassCard
-              payment={payment}
-              tag={tag}
-              title={title}
-              sub={sub}
-              day={day}
-            ></MClassCard>
+            <>
+              <MClassCard
+                tag={tag}
+                title={title}
+                sub={sub}
+                day={day}
+              ></MClassCard>
+            </>
           ) : (
             ""
           )}

@@ -6,7 +6,15 @@ export const ImageCard = styled.div`
     width: 216px;
     border-radius: 5px;
     box-shadow: rgba(26, 27, 28, 0.187) 0px 4px 8px 0px;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+      top: -5px;
+      transition: 0.5s;
+    }
   }
+
   .top_img {
     height: 162px;
     border-radius: 5px;
@@ -18,12 +26,20 @@ export const ImageCard = styled.div`
   }
 
   .bottom {
-    padding: 15px;
+    padding: 12px;
     line-height: 1.4;
   }
   .main_text {
     font-size: 0.9rem;
     font-weight: 700;
+  }
+
+  .payment {
+    background-color: rgb(56, 64, 64);
+    color: white;
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    font-weight: 800;
   }
 `;
 
