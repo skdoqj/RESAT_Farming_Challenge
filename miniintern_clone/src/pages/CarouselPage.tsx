@@ -8,16 +8,24 @@ function Carousel() {
   const [translatePX, setTranslatePX] = useState(0);
   const [curruntIdx, setCurrentIdx] = useState(0);
 
+  console.log("curruntIdx", curruntIdx);
+  console.log("translatePX", translatePX);
   const move = (n: number) => {
     if (n > 0) {
       //next
-      if (curruntIdx < SLIDES - 1) {
+      if (curruntIdx >= SLIDES - 1) {
+        setCurrentIdx(0);
+        setTranslatePX(0);
+      } else {
         setCurrentIdx(curruntIdx + 1);
         setTranslatePX(translatePX - withSize);
       }
     } else {
       //prev
-      if (curruntIdx > 0) {
+      if (curruntIdx === 0) {
+        setCurrentIdx(SLIDES - 1);
+        setTranslatePX(-withSize * (SLIDES - 1));
+      } else {
         setTranslatePX(translatePX + withSize);
         setCurrentIdx(curruntIdx - 1);
       }
@@ -29,8 +37,11 @@ function Carousel() {
     buttonArray.push(
       <button
         key={i}
-        className="button"
-        onClick={() => setTranslatePX(-withSize * i)}
+        className={i === curruntIdx ? "button active" : "button"}
+        onClick={() => {
+          setTranslatePX(-withSize * i);
+          setCurrentIdx(i);
+        }}
       ></button>
     );
   }

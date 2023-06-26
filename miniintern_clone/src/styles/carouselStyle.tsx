@@ -61,9 +61,12 @@ export const Buttons = styled.div`
     width: 15px;
     height: 15px;
     border-radius: 30px;
-    background-color: #ffffffe3;
+    background-color: #ffffff86;
     margin: 0 5px;
     z-index: 1;
+  }
+  .active {
+    background-color: #ffffff;
   }
 `;
 export const ArrowButton = styled.div`
