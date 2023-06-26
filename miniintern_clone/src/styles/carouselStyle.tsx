@@ -11,10 +11,22 @@ const translate = keyframes`
     }
   `;
 
+// const imgMargin = 50;
+export const Body = styled.div`
+  width: 800px;
+  margin: 50px auto;
+  position: relative;
+
+  h1 {
+    margin-bottom: 20px;
+  }
+`;
 export const Carousel = styled.div<Props>`
   overflow: hidden;
-  .slide_wrapper {
-  }
+  width: 500px;
+  height: 400px;
+  margin: 0 auto;
+
   .img_container {
     width: ${(props) => props.$withSize * 3}px;
     transform: translate(${(props) => props.$translatePX}px);
@@ -36,5 +48,45 @@ export const Carousel = styled.div<Props>`
   }
   .img_card:nth-child(3) {
     background-color: red;
+  }
+  img {
+    width: 100%;
+  }
+`;
+
+export const Buttons = styled.div`
+  position: relative;
+  bottom: 8%;
+  .button {
+    width: 15px;
+    height: 15px;
+    border-radius: 30px;
+    background-color: #ffffffe3;
+    margin: 0 5px;
+    z-index: 1;
+  }
+`;
+export const ArrowButton = styled.div`
+  position: absolute;
+  width: 100%;
+  top: 50%;
+
+  .arrow {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    font-size: 0px;
+    border: 5px solid ${themeColor};
+    background-color: rgba(255, 255, 255, 0);
+    border-width: 0 5px 5px 0;
+    z-index: 1;
+  }
+  .prev {
+    transform: translate(-50%, -50%) rotate(135deg);
+    left: -30%;
+  }
+  .next {
+    transform: translate(-50%, -50%) rotate(-45deg);
+    right: -35%;
   }
 `;
