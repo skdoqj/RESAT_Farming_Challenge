@@ -27,6 +27,9 @@ function Layout() {
             <li>
               <a href="/calender">5일차 캘린더</a>
             </li>
+            <li>
+              <a href="/carousel">6일차 슬라이드</a>
+            </li>
           </ul>
           <div className="right_container">
             <div>서비스 소개</div>
