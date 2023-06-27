@@ -14,14 +14,14 @@ function Carousel() {
   const move = (n: number) => {
     if (n > 0) {
       //next
-      if (curruntIdx === SLIDES - 1) {
+      if (curruntIdx >= SLIDES - 1) {
         setCurrentIdx(0);
       } else {
         setCurrentIdx(curruntIdx + 1);
       }
     } else {
       //prev
-      if (curruntIdx <= 0) {
+      if (curruntIdx === 0) {
         setCurrentIdx(SLIDES - 1);
       } else {
         setCurrentIdx(curruntIdx - 1);
@@ -45,6 +45,15 @@ function Carousel() {
   // 화면 계산
   useEffect(() => {
     setTranslatePX(-curruntIdx * withSize);
+
+    const interval = setInterval(
+      () => setCurrentIdx(curruntIdx !== SLIDES - 1 ? curruntIdx + 1 : 0),
+      5000
+    );
+
+    return () => {
+      clearInterval(interval);
+    };
   }, [curruntIdx]);
 
   return (
