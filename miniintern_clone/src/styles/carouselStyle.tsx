@@ -3,6 +3,8 @@ const themeColor = "rgb(23, 161, 255)";
 
 interface Props {
   $withSize: number;
+  $SLIDES: number;
+  $curruntIdx: number;
   $translatePX: number;
 }
 const translate = keyframes`
@@ -28,7 +30,7 @@ export const Carousel = styled.div<Props>`
   margin: 0 auto;
 
   .img_container {
-    width: ${(props) => props.$withSize * 3}px;
+    width: ${(props) => props.$withSize * props.$SLIDES}px;
     transform: translate(${(props) => props.$translatePX}px);
     /* animation: ${translate} 0.5s; */
   }
@@ -39,16 +41,9 @@ export const Carousel = styled.div<Props>`
     float: left;
     font-size: 100px;
     color: white;
-  }
-  .img_card:nth-child(1) {
     background-color: orange;
   }
-  .img_card:nth-child(2) {
-    background-color: blue;
-  }
-  .img_card:nth-child(3) {
-    background-color: red;
-  }
+
   img {
     width: 100%;
   }
@@ -64,6 +59,7 @@ export const Buttons = styled.div`
     background-color: #ffffff86;
     margin: 0 5px;
     z-index: 1;
+    cursor: pointer;
   }
   .active {
     background-color: #ffffff;
@@ -83,6 +79,7 @@ export const ArrowButton = styled.div`
     background-color: rgba(255, 255, 255, 0);
     border-width: 0 5px 5px 0;
     z-index: 1;
+    cursor: pointer;
   }
   .prev {
     transform: translate(-50%, -50%) rotate(135deg);
