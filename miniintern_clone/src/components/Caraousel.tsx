@@ -36,11 +36,11 @@ function Carousel({ withSize, heightSize, carouselInfo }: Props) {
           ))}
         </div>
         <S.Buttons>{buttonArray}</S.Buttons>
+        <S.ArrowButton>
+          <button className="arrow prev" onClick={() => move(-1)}></button>
+          <button className="arrow next" onClick={() => move(1)}></button>
+        </S.ArrowButton>
       </S.Carousel>
-      <S.ArrowButton>
-        <button className="arrow prev" onClick={() => move(-1)}></button>
-        <button className="arrow next" onClick={() => move(1)}></button>
-      </S.ArrowButton>
     </>
   );
 }

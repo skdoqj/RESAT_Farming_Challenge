@@ -60,7 +60,7 @@ export const Carousel = styled.div<Props>`
     position: absolute;
     top: 80px;
     width: 220px;
-    padding-left: 20px;
+    padding-left: 1em;
     font-weight: 800;
     word-break: keep-all;
     text-align: left;
@@ -87,12 +87,13 @@ export const Buttons = styled.div`
 export const ArrowButton = styled.div`
   position: absolute;
   width: 100%;
-  top: 50%;
+  bottom: 40%;
+  text-align: center;
 
   .arrow {
     position: relative;
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     font-size: 0px;
     border: 5px solid ${themeColor};
     background-color: rgba(255, 255, 255, 0);
@@ -102,10 +103,10 @@ export const ArrowButton = styled.div`
   }
   .prev {
     transform: translate(-50%, -50%) rotate(135deg);
-    left: -30%;
+    left: -40%;
   }
   .next {
     transform: translate(-50%, -50%) rotate(-45deg);
-    right: -35%;
+    right: -45%;
   }
 `;
