@@ -3,6 +3,7 @@ const themeColor = "rgb(23, 161, 255)";
 
 interface Props {
   $withSize: number;
+  $heightSize: number;
   $SLIDES: number;
   $curruntIdx: number;
   $translatePX: number;
@@ -26,43 +27,61 @@ export const Body = styled.div`
 export const Carousel = styled.div<Props>`
   overflow: hidden;
   width: ${(props) => props.$withSize}px;
-  height: 300px;
+  height: ${(props) => props.$heightSize}px;
   margin: 0 auto;
+  border-radius: 15px;
+  position: relative;
 
   .img_container {
     width: ${(props) => props.$withSize * props.$SLIDES}px;
     transform: translate(${(props) => props.$translatePX}px);
+    position: relative;
     /* animation: ${translate} 0.5s; */
   }
 
   .img_card {
     width: ${(props) => props.$withSize}px;
-    height: 300px;
+    height: ${(props) => props.$heightSize}px;
     float: left;
     font-size: 100px;
     color: white;
-    background-color: orange;
   }
 
   img {
-    width: 100%;
+    width: ${(props) => props.$withSize}px;
+    height: ${(props) => props.$heightSize}px;
+    //이미지 비율 유지
+    object-fit: cover;
+  }
+  .text {
+    z-index: 1;
+    font-size: 2rem;
+    color: black;
+    position: absolute;
+    top: 80px;
+    width: 220px;
+    padding-left: 20px;
+    font-weight: 800;
+    word-break: keep-all;
+    text-align: left;
   }
 `;
 
 export const Buttons = styled.div`
-  position: relative;
-  bottom: 8%;
+  position: absolute;
+  top: 5%;
+  right: 5%;
   .button {
-    width: 15px;
-    height: 15px;
+    width: 12px;
+    height: 12px;
     border-radius: 30px;
-    background-color: #ffffff86;
+    background-color: #6363633e;
     margin: 0 5px;
     z-index: 1;
     cursor: pointer;
   }
   .active {
-    background-color: #ffffff;
+    background-color: ${themeColor};
   }
 `;
 export const ArrowButton = styled.div`

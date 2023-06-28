@@ -48,7 +48,7 @@ export function useCarousel({ withSize, heightSize, SLIDES }: Props) {
 
     const interval = setInterval(
       () => setCurrentIdx(curruntIdx !== SLIDES - 1 ? curruntIdx + 1 : 0),
-      5000
+      2000
     );
 
     return () => {
