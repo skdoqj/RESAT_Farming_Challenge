@@ -25,8 +25,8 @@ export const Body = styled.div`
 `;
 export const Carousel = styled.div<Props>`
   overflow: hidden;
-  width: 500px;
-  height: 400px;
+  width: ${(props) => props.$withSize}px;
+  height: 300px;
   margin: 0 auto;
 
   .img_container {
@@ -37,7 +37,7 @@ export const Carousel = styled.div<Props>`
 
   .img_card {
     width: ${(props) => props.$withSize}px;
-    height: 400px;
+    height: 300px;
     float: left;
     font-size: 100px;
     color: white;

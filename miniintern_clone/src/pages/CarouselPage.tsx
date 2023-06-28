@@ -1,60 +1,17 @@
 import * as S from "../styles/carouselStyle";
 import { useEffect, useState } from "react";
-// import { styled, keyframes } from "styled-components";
+import { useCarousel } from "../components/Hooks/useCarousel";
 
 function Carousel() {
-  const withSize = 500;
+  const withSize = 400;
+  const heightSize = 300;
   const SLIDES = document.getElementsByClassName("img_card").length;
 
-  const [curruntIdx, setCurrentIdx] = useState(0);
-  const [translatePX, setTranslatePX] = useState(0);
-
-  console.log("curruntIdx", curruntIdx);
-
-  const move = (n: number) => {
-    if (n > 0) {
-      //next
-      if (curruntIdx >= SLIDES - 1) {
-        setCurrentIdx(0);
-      } else {
-        setCurrentIdx(curruntIdx + 1);
-      }
-    } else {
-      //prev
-      if (curruntIdx === 0) {
-        setCurrentIdx(SLIDES - 1);
-      } else {
-        setCurrentIdx(curruntIdx - 1);
-      }
-    }
-  };
-
-  let buttonArray = [];
-  for (let i = 0; i < SLIDES; i++) {
-    buttonArray.push(
-      <button
-        key={i}
-        className={i === curruntIdx ? "button active" : "button"}
-        onClick={() => {
-          setCurrentIdx(i);
-        }}
-      ></button>
-    );
-  }
-
-  // 화면 계산
-  useEffect(() => {
-    setTranslatePX(-curruntIdx * withSize);
-
-    const interval = setInterval(
-      () => setCurrentIdx(curruntIdx !== SLIDES - 1 ? curruntIdx + 1 : 0),
-      5000
-    );
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [curruntIdx]);
+  let { curruntIdx, translatePX, buttonArray, move } = useCarousel({
+    withSize,
+    heightSize,
+    SLIDES,
+  });
 
   return (
     <S.Body>
