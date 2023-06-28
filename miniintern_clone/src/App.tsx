@@ -11,7 +11,7 @@ import Layout from "./components/Layout";
 import Timer from "./pages/TimerPage";
 import Todo from "./pages/TodoPage";
 import Calender from "./pages/CalenderPage";
-import Carousel from "./pages/CarouselPage";
+import CarouselPage from "./pages/CarouselPage";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/carousel",
-        element: <Carousel />,
+        element: <CarouselPage />,
       },
     ],
   },
