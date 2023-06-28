@@ -12,7 +12,6 @@ interface Info {
 
 function Carousel({ withSize, heightSize, carouselInfo }: Props) {
   const SLIDES = document.getElementsByClassName("img_card").length;
-
   let { curruntIdx, translatePX, buttonArray, move } = useCarousel({
     withSize,
     heightSize,
@@ -26,15 +25,15 @@ function Carousel({ withSize, heightSize, carouselInfo }: Props) {
         $SLIDES={SLIDES}
         $curruntIdx={curruntIdx}
         $translatePX={translatePX}
+        $heightSize={heightSize}
       >
         <div className="img_container">
-          <div className="img_card">
-            <img></img>
-            <div></div>
-          </div>
-          <div className="img_card">1</div>
-          <div className="img_card">3</div>
-          <div className="img_card">4</div>
+          {carouselInfo.map((v) => (
+            <div className="img_card">
+              <img src={v.img}></img>
+              <div className="text">{v.text}</div>
+            </div>
+          ))}
         </div>
         <S.Buttons>{buttonArray}</S.Buttons>
       </S.Carousel>

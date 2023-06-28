@@ -7,7 +7,33 @@ import {
   hFolioArray,
 } from "../components/MainModule";
 
+import Carousel from "../components/Caraousel";
+
 function Main() {
+  const carouselSize = { withSize: 335, heightSize: 250 };
+  const carouselInfo = [
+    {
+      text: "30대 비전공자의 개발자 커리어 전환기",
+      img: "https://img.freepik.com/free-photo/adorable-kitty-looking-like-it-want-to-hunt_23-2149167099.jpg?w=2000",
+    },
+    {
+      text: "성장하는 주니어 일잘러는 어떻게 되나요?",
+      img: "https://cdn.hellodd.com/news/photo/202005/71835_craw1.jpg",
+    },
+    {
+      text: "3년차 제약회사 연구원이 알려주는 자소서&면접 노하우",
+      img: "https://image.dongascience.com/Photo/2016/09/14750507361195.jpg",
+    },
+    {
+      text: "무자격증 지방대 문과생이라도 IT취업과 이직은 하고싶어",
+      img: "https://i.namu.wiki/i/XGgP6E-6eOwHuC84pFQpqvTvFAj1VjJQJlOOQV7Ky3MrBzI-IdXGw9r4L1YkCxUv5Uk3rYVWkmWHY8unoh8iSQ.webp",
+    },
+    {
+      text: "",
+      img: "https://img.danawa.com/images/descFiles/5/268/4267661_1590591430238.jpeg",
+    },
+  ];
+
   return (
     <>
       <S.Main>
@@ -58,7 +84,13 @@ function Main() {
             <section className="slide_banner">
               <div className="background"></div>
               <div className="banner_container">
-                <div className="banner"></div>
+                <div className="banner">
+                  <Carousel
+                    withSize={carouselSize.withSize}
+                    heightSize={carouselSize.heightSize}
+                    carouselInfo={carouselInfo}
+                  ></Carousel>
+                </div>
                 <div className="text_box">
                   <span>서비스 런칭</span>
                   <p className="title">해피폴리오로 취업 정보를 받으세요</p>
