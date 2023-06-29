@@ -1,7 +1,11 @@
 import { Outlet } from "react-router-dom";
 import * as S from "../styles/styles";
+import { useState } from "react";
 
 function Layout() {
+  const [openNav, setOpenNav] = useState(false);
+
+  console.log(openNav);
   return (
     <>
       <S.Header>
@@ -9,33 +13,44 @@ function Layout() {
           <div className="logo">
             <a href="/">miniintern</a>
           </div>
-          <ul>
-            <li>
-              <a href="https://github.com/skdoqj/RESAT_Farming_Challenge">
-                1일차
-              </a>
-            </li>
-            <li>
-              <a href="/">2일차</a>
-            </li>
-            <li>
-              <a href="/timer">3일차 타이머</a>
-            </li>
-            <li>
-              <a href="/todo">4일차 투두</a>
-            </li>
-            <li>
-              <a href="/calender">5일차 캘린더</a>
-            </li>
-            <li>
-              <a href="/carousel">6일차 슬라이드</a>
-            </li>
-          </ul>
-          <div className="right_container">
-            <div>서비스 소개</div>
-            <div className="sign_in">회원가입</div>
-            <div className="log_in">로그인</div>
-          </div>
+          <S.Nav $openNav>
+            <button
+              className={
+                openNav ? "nav_button x_button" : "nav_button hamburger"
+              }
+              onClick={() => setOpenNav((prev) => !prev)}
+            >
+              <div className="line"></div>
+              <div className="line"></div>
+              <div className="line"></div>
+            </button>
+            <div className={openNav ? "opne_nave" : "nav"}>
+              <ul>
+                <li>
+                  <a href="https://github.com/skdoqj/RESAT_Farming_Challenge">
+                    Github
+                  </a>
+                </li>
+                <li>
+                  <a href="/timer">타이머</a>
+                </li>
+                <li>
+                  <a href="/todo">투두</a>
+                </li>
+                <li>
+                  <a href="/calender">캘린더</a>
+                </li>
+                <li>
+                  <a href="/carousel">슬라이드</a>
+                </li>
+              </ul>
+              <div className="right_container">
+                <div>서비스 소개</div>
+                <div className="sign_in">회원가입</div>
+                <div className="log_in">로그인</div>
+              </div>
+            </div>
+          </S.Nav>
         </header>
       </S.Header>
 
