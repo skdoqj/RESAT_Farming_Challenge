@@ -1,11 +1,23 @@
 import { Outlet } from "react-router-dom";
 import * as S from "../styles/styles";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function Layout() {
+  const navRef = useRef<any>(null);
   const [openNav, setOpenNav] = useState(false);
 
-  console.log(openNav);
+  // console.log(nav);
+  if (openNav) {
+    const clickOut = (e: any) => {
+      if (!navRef.current || !navRef.current.contains(e.target)) {
+        setOpenNav(false);
+        console.log(openNav);
+      }
+    };
+    document.addEventListener("click", clickOut);
+  }
+
+  // console.log(openNav);
   return (
     <>
       <S.Header>
@@ -13,7 +25,7 @@ function Layout() {
           <div className="logo">
             <a href="/">miniintern</a>
           </div>
-          <S.Nav $openNav>
+          <S.Nav $openNav ref={navRef}>
             <button
               className={
                 openNav ? "nav_button x_button" : "nav_button hamburger"
