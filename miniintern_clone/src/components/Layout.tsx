@@ -6,18 +6,15 @@ function Layout() {
   const navRef = useRef<any>(null);
   const [openNav, setOpenNav] = useState(false);
 
-  // console.log(nav);
   if (openNav) {
     const clickOut = (e: any) => {
       if (!navRef.current || !navRef.current.contains(e.target)) {
         setOpenNav(false);
-        console.log(openNav);
       }
     };
     document.addEventListener("click", clickOut);
   }
 
-  // console.log(openNav);
   return (
     <>
       <S.Header>
@@ -58,8 +55,10 @@ function Layout() {
               </ul>
               <div className="right_container">
                 <div>서비스 소개</div>
-                <div className="sign_in">회원가입</div>
-                <div className="log_in">로그인</div>
+                <div className="signin">회원가입</div>
+                <div className="login">
+                  <a href="/login">로그인</a>
+                </div>
               </div>
             </div>
           </S.Nav>

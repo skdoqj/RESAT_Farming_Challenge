@@ -80,8 +80,8 @@ export const Nav = styled.div<{ $openNav: boolean }>`
   .right_container > div {
     padding: 20px;
   }
-  .sign_in,
-  .log_in {
+  .signin,
+  .login {
     color: ${themeColor};
   }
 
@@ -162,6 +162,7 @@ export const Nav = styled.div<{ $openNav: boolean }>`
         top: 400px;
         left: 10%;
         padding: 0;
+        z-index: 3;
       }
     }
   }
