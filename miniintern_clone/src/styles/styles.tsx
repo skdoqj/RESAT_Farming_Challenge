@@ -75,6 +75,7 @@ export const Nav = styled.div<{ $openNav: boolean }>`
 
     font-weight: 400;
     float: right;
+    margin-left: auto;
     display: flex;
   }
   .right_container > div {
