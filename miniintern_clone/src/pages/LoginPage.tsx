@@ -22,6 +22,7 @@ function LoginPage() {
     } else {
       localStorage.setItem("login", ID);
       movePage("/");
+      window.location.reload();
     }
   };
 

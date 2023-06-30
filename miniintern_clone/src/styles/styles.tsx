@@ -81,7 +81,8 @@ export const Nav = styled.div<{ $openNav: boolean }>`
     padding: 20px;
   }
   .signin,
-  .login {
+  .login,
+  .logout {
     color: ${themeColor};
   }
 

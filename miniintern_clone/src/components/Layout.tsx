@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 function Layout() {
   const navRef = useRef<any>(null);
   const [openNav, setOpenNav] = useState(false);
+  const [loginState, setLoginState] = useState(false);
 
   if (openNav) {
     const clickOut = (e: any) => {
@@ -14,6 +15,22 @@ function Layout() {
     };
     document.addEventListener("click", clickOut);
   }
+
+  const logout = () => {
+    localStorage.removeItem("login");
+    setLoginState(false);
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem("login") === null) {
+      setLoginState(false);
+    } else {
+      setLoginState(true);
+    }
+
+    console.log(localStorage.getItem("login"));
+  }, []);
 
   return (
     <>
@@ -55,10 +72,18 @@ function Layout() {
               </ul>
               <div className="right_container">
                 <div>서비스 소개</div>
-                <div className="signin">회원가입</div>
-                <div className="login">
-                  <a href="/login">로그인</a>
-                </div>
+                {loginState ? (
+                  <div className="logout" onClick={logout}>
+                    로그아웃
+                  </div>
+                ) : (
+                  <>
+                    <div className="signin">회원가입</div>
+                    <div className="login">
+                      <a href="/login">로그인</a>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </S.Nav>
