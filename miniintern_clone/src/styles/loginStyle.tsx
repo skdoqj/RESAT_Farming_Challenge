@@ -36,6 +36,7 @@ export const LoginForm = styled.form`
     margin: 0 auto;
     padding-top: 10px;
     color: ${themeColor};
+    font-size: 0.9rem;
     font-weight: 400;
     text-align: left;
     padding-left: 25px;
