@@ -84,6 +84,7 @@ export const Nav = styled.div<{ $openNav: boolean }>`
   .login,
   .logout {
     color: ${themeColor};
+    cursor: pointer;
   }
 
   @media only screen and (max-width: 800px) {
