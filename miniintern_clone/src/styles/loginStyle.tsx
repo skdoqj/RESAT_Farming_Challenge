@@ -59,4 +59,8 @@ export const LoginForm = styled.form`
       cursor: pointer;
     }
   }
+
+  .test {
+    margin-top: 50px;
+  }
 `;

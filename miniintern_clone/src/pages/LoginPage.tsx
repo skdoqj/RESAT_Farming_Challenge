@@ -51,7 +51,11 @@ function LoginPage() {
         <span className="sign_in">회원가입</span>
       </div>
 
-      {/* <div className="test">임시 계정 suwan 1234</div> */}
+      <div className="test">
+        <div>임시계정</div>
+        <div>ID : suwan</div>
+        <div>PW : 1234</div>
+      </div>
     </S.LoginForm>
   );
 }
