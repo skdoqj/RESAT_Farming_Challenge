@@ -28,8 +28,6 @@ function Layout() {
     } else {
       setLoginState(true);
     }
-
-    console.log(localStorage.getItem("login"));
   }, []);
 
   return (

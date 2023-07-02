@@ -30,7 +30,7 @@ function Calender() {
   //   console.log(today, lastDate, firstDay);
 
   let monthArry: MonthType = { month: selectedMonth, dates: [] };
-  const [thisMonthArry, setThisMonthArray] = useState(monthArry);
+  const [thisMonthArry, setThisMonthArray] = useState<DateType[]>([]);
 
   const makeCalender = () => {
     let i = 1;
@@ -38,7 +38,6 @@ function Calender() {
     while (n <= 7) {
       let dateArry: DateType = { date: i, day: n };
       monthArry.dates.push(dateArry);
-      //   setThisMonthArray( monthArry.dates.push(dateArry))
       i++;
       n++;
       if (n >= 7) {
@@ -46,15 +45,18 @@ function Calender() {
       }
       if (i > lastDate) break;
     }
+    setThisMonthArray(monthArry.dates);
   };
+
+  console.log(thisMonthArry);
 
   useEffect(() => {
     makeCalender();
 
-    console.log(monthArry);
-    console.log(monthArry.dates[0]);
+    // console.log(monthArry);
+    // console.log(monthArry.dates[0]);
 
-    monthArry.dates.map((v) => console.log("날짜", v.date));
+    // monthArry.dates.map((v) => console.log("날짜", v.date));
   }, [selectedMonth]);
 
   return (
@@ -85,8 +87,8 @@ function Calender() {
           </div>
 
           <div className="date_container">
-            {monthArry.dates.map((v) => (
-              <div>{v.date}</div>
+            {thisMonthArry.map((v) => (
+              <div key={v.date}>{v.date}</div>
             ))}
           </div>
         </div>
