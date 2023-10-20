@@ -62,6 +62,7 @@ function Calender() {
   };
 
   console.log(thisMonthArry);
+
   const moveMonth = (num: number) => {
     if (num == -1) {
       //이전 달
@@ -87,7 +88,21 @@ function Calender() {
     }
   };
 
+  //전달 날짜
+  const lastMonthDate = new Date(selectedYear, selectedMonth - 1, 0).getDate();
+
+  const [lastMonthArray, setLastMonthArray] = useState<number[]>([]);
+  const frontDays = () => {
+    const array: number[] = [];
+    for (let i = 0; i < firstDay; i++) {
+      array.unshift(lastMonthDate - i);
+    }
+    setLastMonthArray(array);
+  };
+  console.log("지난 달", lastMonthArray);
+
   useEffect(() => {
+    frontDays();
     makeCalender();
 
     // console.log(monthArry);
@@ -110,7 +125,7 @@ function Calender() {
           <button onClick={() => moveMonth(+1)}>다음 달</button>
         </div>
         <div className="calender_body">
-          <div className="week">
+          <div className="date_container">
             <span>일</span>
             <span>월</span>
             <span>화</span>
@@ -118,9 +133,13 @@ function Calender() {
             <span>목</span>
             <span>금</span>
             <span>토</span>
-          </div>
-
-          <div className="date_container">
+            {/* 지난달 */}
+            {lastMonthArray.map((v) => (
+              <div className="last_month_dates" key={v}>
+                {v}
+              </div>
+            ))}
+            {/* 이번 달 */}
             {thisMonthArry.map((v) => (
               <div key={v.date}>{v.date}</div>
             ))}
