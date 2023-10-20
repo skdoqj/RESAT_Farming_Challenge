@@ -13,21 +13,34 @@ interface DateType {
 }
 
 function Calender() {
+  //오늘 날짜
+  const nowDate: Date = new Date();
+
   const today = {
-    year: new Date().getFullYear(),
-    month: new Date().getMonth(),
-    date: new Date().getDate(),
-    day: new Date().getDay(),
+    year: nowDate.getFullYear(),
+    month: nowDate.getMonth() + 1,
+    date: nowDate.getDate(),
+    day: nowDate.getDay(),
   };
 
-  const week = ["일", "월", "화", "수", "목", "금", "토"];
+  console.log("현재 날짜", today.year, today.month, today.date, today.day);
 
+  const WEEKDAY = ["일", "월", "화", "수", "목", "금", "토"];
+
+  // 오늘 날짜를 기본으로
   const [selectedYear, setSelectedYear] = useState(today.year);
-  const [selectedMonth, setSelectedMonth] = useState(today.month + 1);
+  const [selectedMonth, setSelectedMonth] = useState(today.month);
   const [selectedDate, setSelectedDate] = useState(today.date);
   const lastDate = new Date(selectedYear, selectedMonth, 0).getDate(); //말일
-  const firstDay = new Date(selectedYear, selectedMonth, 1).getDay(); //첫일의 요일
-  //   console.log(today, lastDate, firstDay);
+  const firstDay = new Date(selectedYear, selectedMonth - 1, 1).getDay(); //첫일의 요일
+  console.log(
+    "월:",
+    today.month,
+    ", 마지막 날짜:",
+    lastDate,
+    ", 첫날 요일:",
+    firstDay
+  );
 
   let monthArry: MonthType = { month: selectedMonth, dates: [] };
   const [thisMonthArry, setThisMonthArray] = useState<DateType[]>([]);
@@ -49,13 +62,36 @@ function Calender() {
   };
 
   console.log(thisMonthArry);
+  const moveMonth = (num: number) => {
+    if (num == -1) {
+      //이전 달
+      if (selectedMonth == 1) {
+        setSelectedYear((val) => val - 1);
+        setSelectedMonth(12);
+      } else {
+        setSelectedMonth((val) => val - 1);
+      }
+    } else if (num == +1) {
+      //다음 달
+      if (selectedMonth == 12) {
+        setSelectedYear((val) => val + 1);
+        setSelectedMonth(1);
+      } else {
+        setSelectedMonth((val) => val + 1);
+      }
+    } else if (num == 0) {
+      //오늘
+      setSelectedYear(today.year);
+      setSelectedMonth(today.month);
+      setSelectedDate(today.date);
+    }
+  };
 
   useEffect(() => {
     makeCalender();
 
     // console.log(monthArry);
     // console.log(monthArry.dates[0]);
-
     // monthArry.dates.map((v) => console.log("날짜", v.date));
   }, [selectedMonth]);
 
@@ -67,13 +103,11 @@ function Calender() {
           <span>{selectedYear}년</span>
           <span>{selectedMonth}월</span>
           <p></p>
-          <button onClick={() => setSelectedMonth(selectedMonth - 1)}>
-            전 달
-          </button>
+          <button onClick={() => moveMonth(-1)}>전 달</button>
           <p></p>
-          <button onClick={() => setSelectedMonth(selectedMonth + 1)}>
-            다음 달
-          </button>
+          <button onClick={() => moveMonth(0)}>오늘</button>
+          <p></p>
+          <button onClick={() => moveMonth(+1)}>다음 달</button>
         </div>
         <div className="calender_body">
           <div className="week">
