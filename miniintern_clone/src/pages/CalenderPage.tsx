@@ -113,35 +113,51 @@ function Calender() {
   return (
     <>
       <S.Calender>
+        <h1>Calender</h1>
         <div className="calender_head">
-          <h1>Calender</h1>
-          <span>{selectedYear}년</span>
-          <span>{selectedMonth}월</span>
-          <p></p>
-          <button onClick={() => moveMonth(-1)}>전 달</button>
-          <p></p>
-          <button onClick={() => moveMonth(0)}>오늘</button>
-          <p></p>
-          <button onClick={() => moveMonth(+1)}>다음 달</button>
+          <div className="year_month">
+            <span>{selectedYear}년</span>
+            <span>{selectedMonth}월</span>
+          </div>
+
+          <div className="move_month_btn">
+            <button onClick={() => moveMonth(-1)}>전 달</button>
+
+            <button onClick={() => moveMonth(0)}>오늘</button>
+
+            <button onClick={() => moveMonth(+1)}>다음 달</button>
+          </div>
         </div>
         <div className="calender_body">
+          {/* 요일 */}
+
           <div className="date_container">
-            <span>일</span>
-            <span>월</span>
-            <span>화</span>
-            <span>수</span>
-            <span>목</span>
-            <span>금</span>
-            <span>토</span>
+            {WEEKDAY.map((v) => (
+              <div className="date_box week_box">
+                <span className="week">{v}</span>
+              </div>
+            ))}
+
             {/* 지난달 */}
             {lastMonthArray.map((v) => (
-              <div className="last_month_dates" key={v}>
-                {v}
+              <div className="date_box">
+                <div className="last_month_date date" key={v}>
+                  {v}
+                </div>
               </div>
             ))}
             {/* 이번 달 */}
             {thisMonthArry.map((v) => (
-              <div key={v.date}>{v.date}</div>
+              <div className="date_box">
+                <div
+                  className={
+                    v.date == selectedDate ? "slected_date date" : "date"
+                  }
+                  key={v.date}
+                >
+                  {v.date}
+                </div>
+              </div>
             ))}
           </div>
         </div>
