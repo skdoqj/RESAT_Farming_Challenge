@@ -18,6 +18,14 @@ interface SelectedDate {
   date: number;
 }
 
+interface LocalType {
+  key: number;
+  year: number;
+  month: number;
+  date: number;
+  value: string;
+}
+
 function Calender() {
   //오늘 날짜
   const nowDate: Date = new Date();
@@ -29,7 +37,7 @@ function Calender() {
     day: nowDate.getDay(),
   };
 
-  console.log("현재 날짜", today.year, today.month, today.date, today.day);
+  // console.log("현재 날짜", today.year, today.month, today.date, today.day);
 
   const WEEKDAY = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -71,7 +79,7 @@ function Calender() {
     // setThisMonthArray(monthArry.dates);
   };
 
-  console.log(monthArry);
+  // console.log(monthArry);
 
   const moveMonth = (num: number) => {
     if (num == -1) {
@@ -117,9 +125,46 @@ function Calender() {
     setModal(!modal);
   };
 
+  //메모
+  const KEY = "calenderMemo";
+  const [inputMemo, setInputMemo] = useState("");
+  const [localList, setLocalList] = useState<LocalType[]>([]);
+
+  const activeEnterMemo = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (
+      e.key === "Enter" &&
+      inputMemo != "" &&
+      e.nativeEvent.isComposing === false
+    ) {
+      const memoArray = {
+        key: Math.random(),
+        year: selectedYear,
+        month: selectedMonth,
+        date: selectedDate.date,
+        value: inputMemo,
+      };
+      //로컬에 넣기
+      localStorage.setItem(KEY, JSON.stringify([...localList, memoArray]));
+
+      //로컬 get
+      getLocalMemoList();
+      console.log(memoArray, inputMemo);
+      setInputMemo("");
+    }
+  };
+  const getLocalMemoList = () => {
+    const value = localStorage.getItem(KEY);
+    if (typeof value === "string") {
+      const localTodoList = JSON.parse(value);
+      setLocalList(localTodoList);
+    }
+    console.log(localList);
+  };
+
   useEffect(() => {
     frontDays();
     makeCalender();
+    getLocalMemoList();
   }, [selectedMonth]);
 
   return (
@@ -190,7 +235,26 @@ function Calender() {
             <div>{selectedYear}년</div>
             <div>{selectedMonth}월</div>
             <div>{selectedDate.date}일</div>
-            <input type="string"></input>
+            <label>새 이벤트 생성</label>
+            <input
+              type="text"
+              onChange={(e) => setInputMemo(e.target.value)}
+              onKeyDown={(e) => activeEnterMemo(e)}
+              value={inputMemo}
+            ></input>
+            <div>
+              <ul>
+                {localList.map((v) =>
+                  v.year == selectedYear &&
+                  v.month == selectedMonth &&
+                  v.date == selectedDate.date ? (
+                    <li key={v.key}>{v.value}</li>
+                  ) : (
+                    <></>
+                  )
+                )}
+              </ul>
+            </div>
           </div>
         </S.Modal>
       )}
