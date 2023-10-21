@@ -4,12 +4,18 @@ import { useEffect, useState } from "react";
 import * as S from "../styles/calenderStyle";
 
 interface MonthType {
+  year: number;
   month: number;
   dates: DateType[];
 }
 interface DateType {
   date: number;
   day: number;
+}
+interface SelectedDate {
+  year: number;
+  month: number;
+  date: number;
 }
 
 function Calender() {
@@ -30,27 +36,30 @@ function Calender() {
   // 오늘 날짜를 기본으로
   const [selectedYear, setSelectedYear] = useState(today.year);
   const [selectedMonth, setSelectedMonth] = useState(today.month);
-  const [selectedDate, setSelectedDate] = useState(today.date);
   const lastDate = new Date(selectedYear, selectedMonth, 0).getDate(); //말일
   const firstDay = new Date(selectedYear, selectedMonth - 1, 1).getDay(); //첫일의 요일
-  console.log(
-    "월:",
-    today.month,
-    ", 마지막 날짜:",
-    lastDate,
-    ", 첫날 요일:",
-    firstDay
-  );
+  const [selectedDate, setSelectedDate] = useState<SelectedDate>({
+    year: today.year,
+    month: today.month,
+    date: today.date,
+  });
 
-  let monthArry: MonthType = { month: selectedMonth, dates: [] };
+  const [monthArry, setMonthArray] = useState<MonthType>({
+    year: selectedYear,
+    month: selectedMonth,
+    dates: [],
+  });
+
   const [thisMonthArry, setThisMonthArray] = useState<DateType[]>([]);
 
   const makeCalender = () => {
+    const array = [];
     let i = 1;
     let n = firstDay;
     while (n <= 7) {
       let dateArry: DateType = { date: i, day: n };
-      monthArry.dates.push(dateArry);
+      // monthArry.dates.push(dateArry);
+      array.push(dateArry);
       i++;
       n++;
       if (n >= 7) {
@@ -58,10 +67,11 @@ function Calender() {
       }
       if (i > lastDate) break;
     }
-    setThisMonthArray(monthArry.dates);
+    setMonthArray({ ...monthArry, dates: array });
+    // setThisMonthArray(monthArry.dates);
   };
 
-  console.log(thisMonthArry);
+  console.log(monthArry);
 
   const moveMonth = (num: number) => {
     if (num == -1) {
@@ -84,7 +94,7 @@ function Calender() {
       //오늘
       setSelectedYear(today.year);
       setSelectedMonth(today.month);
-      setSelectedDate(today.date);
+      setSelectedDate({ ...selectedDate, date: today.date });
     }
   };
 
@@ -99,15 +109,17 @@ function Calender() {
     }
     setLastMonthArray(array);
   };
-  console.log("지난 달", lastMonthArray);
+  // console.log("지난 달", lastMonthArray);
+
+  //모달
+  const [modal, setModal] = useState<boolean>(false);
+  const toggleModal = () => {
+    setModal(!modal);
+  };
 
   useEffect(() => {
     frontDays();
     makeCalender();
-
-    // console.log(monthArry);
-    // console.log(monthArry.dates[0]);
-    // monthArry.dates.map((v) => console.log("날짜", v.date));
   }, [selectedMonth]);
 
   return (
@@ -122,9 +134,7 @@ function Calender() {
 
           <div className="move_month_btn">
             <button onClick={() => moveMonth(-1)}>전 달</button>
-
             <button onClick={() => moveMonth(0)}>오늘</button>
-
             <button onClick={() => moveMonth(+1)}>다음 달</button>
           </div>
         </div>
@@ -147,11 +157,17 @@ function Calender() {
               </div>
             ))}
             {/* 이번 달 */}
-            {thisMonthArry.map((v) => (
-              <div className="date_box">
+            {monthArry.dates.map((v) => (
+              <div
+                onClick={() => {
+                  toggleModal();
+                  setSelectedDate({ ...selectedDate, date: v.date });
+                }}
+                className="date_box"
+              >
                 <div
                   className={
-                    v.date == selectedDate ? "slected_date date" : "date"
+                    v.date == selectedDate.date ? "slected_date date" : "date"
                   }
                   key={v.date}
                 >
@@ -164,6 +180,20 @@ function Calender() {
         <CalenderHead></CalenderHead>
         <CalenderBody lastDate={lastDate} firstDay={firstDay}></CalenderBody>
       </S.Calender>
+
+      {modal && (
+        <S.Modal className="modal">
+          <div className="overlay"></div>
+          <div className="madal_content">
+            <button onClick={toggleModal}>닫기</button>
+            <h2>hello</h2>
+            <div>{selectedYear}년</div>
+            <div>{selectedMonth}월</div>
+            <div>{selectedDate.date}일</div>
+            <input type="string"></input>
+          </div>
+        </S.Modal>
+      )}
     </>
   );
 }

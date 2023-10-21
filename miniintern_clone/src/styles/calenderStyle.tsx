@@ -43,6 +43,7 @@ export const Calender = styled.div`
 
     .date_box {
       height: 60px;
+      width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -69,6 +70,31 @@ export const Calender = styled.div`
       border-bottom: 1px solid ${grayColor};
       .week {
       }
+    }
+  }
+`;
+
+export const Modal = styled.div`
+  .modal,
+  .overlay {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .overlay {
+    background-color: #0000004e;
+  }
+  .madal_content {
+    border: 2px solid orange;
+    width: 500px;
+    position: absolute;
+    background-color: white;
+    input {
+      border: 1px solid black;
     }
   }
 `;
