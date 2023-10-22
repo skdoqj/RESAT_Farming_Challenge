@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import * as S from "../styles/todoStyle";
-import { TodoType } from "../types/todo";
+import { TodoType } from "../types/todoTypes";
 import TodoContent from "../components/TodoContent";
 
 const KEY = "todoList";

@@ -1,30 +1,8 @@
-import CalenderHead from "../components/Calender/CalenderHead";
+import CalenderDate from "../components/Calender/CalenderDate";
 import CalenderBody from "../components/Calender/CalenderBody";
 import { useEffect, useState } from "react";
 import * as S from "../styles/calenderStyle";
-
-interface MonthType {
-  year: number;
-  month: number;
-  dates: DateType[];
-}
-interface DateType {
-  date: number;
-  day: number;
-}
-interface SelectedDate {
-  year: number;
-  month: number;
-  date: number;
-}
-
-interface LocalType {
-  key: number;
-  year: number;
-  month: number;
-  date: number;
-  value: string;
-}
+import * as T from "../types/calenderTypes";
 
 function Calender() {
   //오늘 날짜
@@ -46,26 +24,26 @@ function Calender() {
   const [selectedMonth, setSelectedMonth] = useState(today.month);
   const lastDate = new Date(selectedYear, selectedMonth, 0).getDate(); //말일
   const firstDay = new Date(selectedYear, selectedMonth - 1, 1).getDay(); //첫일의 요일
-  const [selectedDate, setSelectedDate] = useState<SelectedDate>({
+  const [selectedDate, setSelectedDate] = useState<T.SelectedDate>({
     year: today.year,
     month: today.month,
     date: today.date,
   });
 
-  const [monthArry, setMonthArray] = useState<MonthType>({
+  const [monthArry, setMonthArray] = useState<T.MonthType>({
     year: selectedYear,
     month: selectedMonth,
     dates: [],
   });
 
-  const [thisMonthArry, setThisMonthArray] = useState<DateType[]>([]);
+  const [thisMonthArry, setThisMonthArray] = useState<T.DateType[]>([]);
 
   const makeCalender = () => {
     const array = [];
     let i = 1;
     let n = firstDay;
     while (n <= 7) {
-      let dateArry: DateType = { date: i, day: n };
+      let dateArry: T.DateType = { date: i, day: n };
       // monthArry.dates.push(dateArry);
       array.push(dateArry);
       i++;
@@ -128,7 +106,7 @@ function Calender() {
   //메모
   const KEY = "calenderMemo";
   const [inputMemo, setInputMemo] = useState("");
-  const [localList, setLocalList] = useState<LocalType[]>([]);
+  const [localList, setLocalList] = useState<T.LocalType[]>([]);
 
   const activeEnterMemo = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (
@@ -214,15 +192,20 @@ function Calender() {
                   className={
                     v.date == selectedDate.date ? "slected_date date" : "date"
                   }
-                  key={v.date}
                 >
-                  {v.date}
+                  <CalenderDate
+                    key={v.date}
+                    date={v.date}
+                    localList={localList}
+                    selectedYear={selectedYear}
+                    selectedMonth={selectedMonth}
+                  ></CalenderDate>
                 </div>
               </div>
             ))}
           </div>
         </div>
-        <CalenderHead></CalenderHead>
+
         <CalenderBody lastDate={lastDate} firstDay={firstDay}></CalenderBody>
       </S.Calender>
 
@@ -231,10 +214,11 @@ function Calender() {
           <div className="overlay"></div>
           <div className="madal_content">
             <button onClick={toggleModal}>닫기</button>
-            <h2>hello</h2>
-            <div>{selectedYear}년</div>
-            <div>{selectedMonth}월</div>
-            <div>{selectedDate.date}일</div>
+            <div>
+              <span>{selectedYear}년</span>
+              <span>{selectedMonth}월</span>
+              <span>{selectedDate.date}일</span>
+            </div>
             <label>새 이벤트 생성</label>
             <input
               type="text"
@@ -244,14 +228,13 @@ function Calender() {
             ></input>
             <div>
               <ul>
-                {localList.map((v) =>
-                  v.year == selectedYear &&
-                  v.month == selectedMonth &&
-                  v.date == selectedDate.date ? (
-                    <li key={v.key}>{v.value}</li>
-                  ) : (
-                    <></>
-                  )
+                {localList.map(
+                  (v) =>
+                    v.year == selectedYear &&
+                    v.month == selectedMonth &&
+                    v.date == selectedDate.date && (
+                      <li key={v.key}>{v.value}</li>
+                    )
                 )}
               </ul>
             </div>

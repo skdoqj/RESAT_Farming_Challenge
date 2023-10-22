@@ -47,22 +47,36 @@ export const Calender = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       /* border: 1px solid ${grayColor}; */
-
       .date {
       }
       //선택 날짜
       .slected_date {
-        /* width: 30px; */
-        /* height: 30px; */
         color: white;
-        background-color: ${themeColor};
-        border-radius: 30px;
-        padding: 8px 11px;
+        position: relative;
+        .selected_point {
+          z-index: -1;
+          position: absolute;
+          top: -8px;
+          left: -8px;
+          width: 35px;
+          height: 35px;
+          background-color: ${themeColor};
+          border-radius: 30px;
+        }
       }
 
       .last_month_date {
         color: ${grayColor};
+      }
+
+      .memo_point {
+        height: 5px;
+        width: 5px;
+        background-color: ${themeColor};
+        border-radius: 5px;
+        margin: 0 auto;
       }
     }
     .week_box {
@@ -89,10 +103,11 @@ export const Modal = styled.div`
     background-color: #0000004e;
   }
   .madal_content {
-    border: 2px solid orange;
     width: 500px;
+    /* margin: 0 auto; */
     position: absolute;
     background-color: white;
+    border-radius: 4px;
     input {
       border: 1px solid black;
     }

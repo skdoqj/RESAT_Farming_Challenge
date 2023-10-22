@@ -1,6 +1,6 @@
 import { useState } from "react";
 import * as S from "../styles/todoStyle";
-import { TodoPropsType } from "../types/todo";
+import { TodoPropsType } from "../types/todoTypes";
 const KEY = "todoList";
 
 function TodoContent({ todo, getLocalTodoList, localList }: TodoPropsType) {
