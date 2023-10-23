@@ -4,6 +4,7 @@ const themeColor = "rgb(23, 161, 255)";
 export const Main = styled.div`
   width: 936px;
   margin: auto;
+  padding-top: 60px;
   text-align: left;
 
   section {

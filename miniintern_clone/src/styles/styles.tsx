@@ -26,20 +26,21 @@ export const Wrapper = styled.div`
 `;
 export const Header = styled.div`
   height: 60px;
+  width: 100%;
   padding-left: 2rem;
   padding-right: 2rem;
+  position: fixed;
+  background-color: white;
   display: flex;
   align-items: center;
-
   border-bottom: 1px solid rgba(104, 104, 104, 0.1);
   font-size: 16px;
+  align-items: center;
+  z-index: 3;
 
-  header {
-    display: flex;
-    align-items: center;
-    width: 100%;
-  }
   .logo {
+    /* position: absolute; */
+    /* left: 10px; */
     font-size: 30px;
     font-weight: 700;
     padding: 0 10px 0 10px;
@@ -100,7 +101,7 @@ export const Nav = styled.div<{ $openNav: boolean }>`
       background-color: transparent;
       width: 56px;
       height: 35px;
-      right: 1%;
+      right: 10%;
     }
     .x_button {
       padding-right: 3%;

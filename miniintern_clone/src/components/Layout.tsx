@@ -34,59 +34,57 @@ function Layout() {
     <>
       <S.Wrapper>
         <S.Header>
-          <header>
-            <div className="logo">
-              <a href="/">miniintern</a>
-            </div>
-            <S.Nav $openNav ref={navRef}>
-              <button
-                className={
-                  openNav ? "nav_button x_button" : "nav_button hamburger"
-                }
-                onClick={() => setOpenNav((prev) => !prev)}
-              >
-                <div className="line"></div>
-                <div className="line"></div>
-                <div className="line"></div>
-              </button>
-              <div className={openNav ? "opne_nave" : "nav"}>
-                <ul>
-                  <li>
-                    <a href="https://github.com/skdoqj/RESAT_Farming_Challenge">
-                      Github
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/timer">타이머</a>
-                  </li>
-                  <li>
-                    <a href="/todo">투두</a>
-                  </li>
-                  <li>
-                    <a href="/calender">캘린더</a>
-                  </li>
-                  <li>
-                    <a href="/carousel">슬라이드</a>
-                  </li>
-                </ul>
-                <div className="right_container">
-                  <div>서비스 소개</div>
-                  {loginState ? (
-                    <div className="logout" onClick={logout}>
-                      로그아웃
+          <div className="logo">
+            <a href="/">miniintern</a>
+          </div>
+          <S.Nav $openNav ref={navRef}>
+            <button
+              className={
+                openNav ? "nav_button x_button" : "nav_button hamburger"
+              }
+              onClick={() => setOpenNav((prev) => !prev)}
+            >
+              <div className="line"></div>
+              <div className="line"></div>
+              <div className="line"></div>
+            </button>
+            <div className={openNav ? "opne_nave" : "nav"}>
+              <ul>
+                <li>
+                  <a href="https://github.com/skdoqj/RESAT_Farming_Challenge">
+                    Github
+                  </a>
+                </li>
+                <li>
+                  <a href="/timer">타이머</a>
+                </li>
+                <li>
+                  <a href="/todo">투두</a>
+                </li>
+                <li>
+                  <a href="/calender">캘린더</a>
+                </li>
+                <li>
+                  <a href="/carousel">슬라이드</a>
+                </li>
+              </ul>
+              <div className="right_container">
+                <div>서비스 소개</div>
+                {loginState ? (
+                  <div className="logout" onClick={logout}>
+                    로그아웃
+                  </div>
+                ) : (
+                  <>
+                    <div className="signin">회원가입</div>
+                    <div className="login">
+                      <a href="/login">로그인</a>
                     </div>
-                  ) : (
-                    <>
-                      <div className="signin">회원가입</div>
-                      <div className="login">
-                        <a href="/login">로그인</a>
-                      </div>
-                    </>
-                  )}
-                </div>
+                  </>
+                )}
               </div>
-            </S.Nav>
-          </header>
+            </div>
+          </S.Nav>
         </S.Header>
 
         <Outlet />
