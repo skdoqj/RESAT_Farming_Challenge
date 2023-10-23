@@ -4,6 +4,7 @@ const grayColor = "#cccccc";
 
 export const Calender = styled.div`
   margin-top: 40px;
+  /* margin-bottom: 100px; */
   .calender_head {
     padding: 20px 0;
     display: flex;
@@ -45,11 +46,14 @@ export const Calender = styled.div`
       height: 60px;
       width: 100%;
       display: flex;
-      justify-content: center;
+      /* justify-content: center; */
+      /* padding-top: 10px; */
       align-items: center;
       flex-direction: column;
       /* border: 1px solid ${grayColor}; */
-      .date {
+      .date,
+      .week {
+        padding-top: 20px;
       }
       //선택 날짜
       .slected_date {
@@ -58,10 +62,10 @@ export const Calender = styled.div`
         .selected_point {
           z-index: -1;
           position: absolute;
-          top: -8px;
-          left: -8px;
-          width: 35px;
-          height: 35px;
+          top: 10px;
+          left: -10px;
+          width: 37px;
+          height: 37px;
           background-color: ${themeColor};
           border-radius: 30px;
         }
@@ -77,6 +81,7 @@ export const Calender = styled.div`
         background-color: ${themeColor};
         border-radius: 5px;
         margin: 0 auto;
+        margin-top: 2px;
       }
     }
     .week_box {

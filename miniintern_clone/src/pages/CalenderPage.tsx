@@ -190,7 +190,7 @@ function Calender() {
               >
                 <div
                   className={
-                    v.date == selectedDate.date ? "slected_date date" : "date"
+                    v.date == selectedDate.date ? "date slected_date" : "date"
                   }
                 >
                   <CalenderDate
