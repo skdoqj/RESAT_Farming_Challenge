@@ -21,7 +21,12 @@ li{
     list-style: none;
 }
 `;
-
+export const Wrapper = styled.div`
+  height: auto;
+  min-height: 80vh;
+  padding-bottom: 80px;
+  /* position: absolu */
+`;
 export const Header = styled.div`
   height: 60px;
   padding-left: 2rem;
@@ -172,13 +177,13 @@ export const Nav = styled.div<{ $openNav: boolean }>`
 `;
 
 export const Footer = styled.div`
-  bottom: 0;
-  height: 200px;
+  position: relative;
+  width: 100vw;
+  height: 80px;
+  padding-top: 20px;
+  transform: translateY(-100%);
   border-top: 1px solid rgba(104, 104, 104, 0.1);
 
-  footer {
-    padding: 20px;
-  }
   footer .name {
     font-size: 30px;
     font-weight: 300;

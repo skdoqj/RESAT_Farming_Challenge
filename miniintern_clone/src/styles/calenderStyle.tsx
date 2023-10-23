@@ -96,6 +96,7 @@ export const Calender = styled.div`
 export const Modal = styled.div`
   .modal,
   .overlay {
+    z-index: 1;
     position: fixed;
     height: 100vh;
     width: 100vw;
@@ -108,6 +109,7 @@ export const Modal = styled.div`
     background-color: #0000004e;
   }
   .madal_content {
+    z-index: 2;
     width: 500px;
     /* margin: 0 auto; */
     position: absolute;
