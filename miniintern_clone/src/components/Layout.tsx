@@ -51,11 +51,6 @@ function Layout() {
             <div className={openNav ? "opne_nave" : "nav"}>
               <ul>
                 <li>
-                  <a href="https://github.com/skdoqj/RESAT_Farming_Challenge">
-                    Github
-                  </a>
-                </li>
-                <li>
                   <a href="/timer">타이머</a>
                 </li>
                 <li>
@@ -69,7 +64,11 @@ function Layout() {
                 </li>
               </ul>
               <div className="right_container">
-                <div>서비스 소개</div>
+                <div>
+                  <a href="https://github.com/skdoqj/RESAT_Farming_Challenge">
+                    Github
+                  </a>
+                </div>
                 {loginState ? (
                   <div className="logout" onClick={logout}>
                     로그아웃
@@ -86,8 +85,9 @@ function Layout() {
             </div>
           </S.Nav>
         </S.Header>
-
-        <Outlet />
+        <div className="outlet">
+          <Outlet />
+        </div>
       </S.Wrapper>
       <S.Footer>
         <footer>

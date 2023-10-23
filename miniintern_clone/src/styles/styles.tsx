@@ -23,6 +23,9 @@ li{
 `;
 export const Wrapper = styled.div`
   min-height: calc(100vh - 10rem);
+  .outlet {
+    padding-top: 60px;
+  }
 `;
 export const Header = styled.div`
   height: 60px;
