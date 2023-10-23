@@ -22,10 +22,7 @@ li{
 }
 `;
 export const Wrapper = styled.div`
-  height: auto;
-  min-height: 80vh;
-  padding-bottom: 80px;
-  /* position: absolu */
+  min-height: calc(100vh - 10rem);
 `;
 export const Header = styled.div`
   height: 60px;
@@ -177,11 +174,9 @@ export const Nav = styled.div<{ $openNav: boolean }>`
 `;
 
 export const Footer = styled.div`
-  position: relative;
+  height: 10rem;
   width: 100vw;
-  height: 80px;
   padding-top: 20px;
-  transform: translateY(-100%);
   border-top: 1px solid rgba(104, 104, 104, 0.1);
 
   footer .name {
