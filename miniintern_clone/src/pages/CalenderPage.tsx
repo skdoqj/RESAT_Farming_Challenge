@@ -114,40 +114,20 @@ function Calender() {
       inputMemo != "" &&
       e.nativeEvent.isComposing === false
     ) {
-      if (
-        localList.find(
-          (v) =>
-            v.year == selectedYear &&
-            v.month == selectedMonth &&
-            v.date == selectedDate.date
-        ) == undefined
-      ) {
-        console.log("없다!");
-        const memoArray: T.LocalType = {
-          key: Math.random(),
-          year: selectedYear,
-          month: selectedMonth,
-          date: selectedDate.date,
-          memo: [{ key: Math.random(), value: inputMemo }],
-        };
-        //로컬에 넣기
-        localStorage.setItem(KEY, JSON.stringify([...localList, memoArray]));
-      } else {
-        const newMeme = { key: Math.random(), value: inputMemo };
-        const test = localList.map((v) => {
-          const 조건 =
-            v.year == selectedYear &&
-            v.month == selectedMonth &&
-            v.date == selectedDate.date;
-          console.log("있다", 조건);
-        });
-
-        // console.log("있다", test);
-      }
+      //기존 코드
+      const memoArray = {
+        key: Math.random(),
+        year: selectedYear,
+        month: selectedMonth,
+        date: selectedDate.date,
+        value: inputMemo,
+      };
+      //로컬에 넣기
+      localStorage.setItem(KEY, JSON.stringify([...localList, memoArray]));
 
       //로컬 get
       getLocalMemoList();
-
+      //input창 초기화
       setInputMemo("");
     }
   };
@@ -258,14 +238,14 @@ function Calender() {
                     v.month == selectedMonth &&
                     v.date == selectedDate.date && (
                       <>
-                        {/* <li key={v.key}>
+                        <li key={v.key}>
                           <div className="memo_point"></div>
                           <div className="memo_value">{v.value}</div>
                           <div className="btns">
                             <button className="btn modify_btn">수정</button>
                             <button className="btn delete_btn">삭제</button>
                           </div>
-                        </li> */}
+                        </li>
                       </>
                     )
                 )}

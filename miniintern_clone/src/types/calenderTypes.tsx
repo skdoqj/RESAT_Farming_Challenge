@@ -12,17 +12,11 @@ export interface SelectedDate {
   month: number;
   date: number;
 }
-
 export interface LocalType {
   key: number;
   year: number;
   month: number;
   date: number;
-  memo: MemoType[];
-}
-
-export interface MemoType {
-  key: number;
   value: string;
 }
 
