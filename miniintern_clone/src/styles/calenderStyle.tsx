@@ -110,13 +110,62 @@ export const Modal = styled.div`
   }
   .madal_content {
     z-index: 2;
-    width: 500px;
-    /* margin: 0 auto; */
+    width: 400px;
+    padding: 20px;
+    left: calc(50% - 220px);
     position: absolute;
     background-color: white;
     border-radius: 4px;
+
+    min-height: 250px;
+    .close_btn {
+      position: absolute;
+      right: 20px;
+      width: 40px;
+    }
+    .date_info {
+      font-size: 18px;
+      font-weight: 400;
+      padding-bottom: 10px;
+    }
+    label {
+      margin-right: 10px;
+    }
     input {
-      border: 1px solid black;
+      border: 1px solid ${grayColor};
+      padding-left: 2px;
+    }
+
+    .memo_wrapper {
+      margin-top: 20px;
+      li {
+        display: flex;
+        /* justify-content: space-between; */
+        align-items: center;
+
+        padding: 0 20px;
+        .memo_point {
+          height: 5px;
+          width: 5px;
+          background-color: ${themeColor};
+          border-radius: 5px;
+        }
+        .memo_value {
+          margin-left: 10px;
+          font-weight: 400;
+        }
+        .btns {
+          right: 10px;
+          margin-left: auto;
+          .btn {
+            margin-left: 10px;
+            background-color: white;
+            padding: 3px 5px;
+            border: 1px solid ${grayColor};
+            border-radius: 5px;
+          }
+        }
+      }
     }
   }
 `;

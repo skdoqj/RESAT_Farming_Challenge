@@ -114,19 +114,40 @@ function Calender() {
       inputMemo != "" &&
       e.nativeEvent.isComposing === false
     ) {
-      const memoArray = {
-        key: Math.random(),
-        year: selectedYear,
-        month: selectedMonth,
-        date: selectedDate.date,
-        value: inputMemo,
-      };
-      //로컬에 넣기
-      localStorage.setItem(KEY, JSON.stringify([...localList, memoArray]));
+      if (
+        localList.find(
+          (v) =>
+            v.year == selectedYear &&
+            v.month == selectedMonth &&
+            v.date == selectedDate.date
+        ) == undefined
+      ) {
+        console.log("없다!");
+        const memoArray: T.LocalType = {
+          key: Math.random(),
+          year: selectedYear,
+          month: selectedMonth,
+          date: selectedDate.date,
+          memo: [{ key: Math.random(), value: inputMemo }],
+        };
+        //로컬에 넣기
+        localStorage.setItem(KEY, JSON.stringify([...localList, memoArray]));
+      } else {
+        const newMeme = { key: Math.random(), value: inputMemo };
+        const test = localList.map((v) => {
+          const 조건 =
+            v.year == selectedYear &&
+            v.month == selectedMonth &&
+            v.date == selectedDate.date;
+          console.log("있다", 조건);
+        });
+
+        // console.log("있다", test);
+      }
 
       //로컬 get
       getLocalMemoList();
-      console.log(memoArray, inputMemo);
+
       setInputMemo("");
     }
   };
@@ -213,8 +234,10 @@ function Calender() {
         <S.Modal className="modal">
           <div className="overlay"></div>
           <div className="madal_content">
-            <button onClick={toggleModal}>닫기</button>
-            <div>
+            <button onClick={toggleModal} className="close_btn">
+              닫기
+            </button>
+            <div className="date_info">
               <span>{selectedYear}년</span>
               <span>{selectedMonth}월</span>
               <span>{selectedDate.date}일</span>
@@ -226,14 +249,24 @@ function Calender() {
               onKeyDown={(e) => activeEnterMemo(e)}
               value={inputMemo}
             ></input>
-            <div>
+
+            <div className="memo_wrapper">
               <ul>
                 {localList.map(
                   (v) =>
                     v.year == selectedYear &&
                     v.month == selectedMonth &&
                     v.date == selectedDate.date && (
-                      <li key={v.key}>{v.value}</li>
+                      <>
+                        {/* <li key={v.key}>
+                          <div className="memo_point"></div>
+                          <div className="memo_value">{v.value}</div>
+                          <div className="btns">
+                            <button className="btn modify_btn">수정</button>
+                            <button className="btn delete_btn">삭제</button>
+                          </div>
+                        </li> */}
+                      </>
                     )
                 )}
               </ul>

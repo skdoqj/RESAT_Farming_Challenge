@@ -18,6 +18,11 @@ export interface LocalType {
   year: number;
   month: number;
   date: number;
+  memo: MemoType[];
+}
+
+export interface MemoType {
+  key: number;
   value: string;
 }
 
