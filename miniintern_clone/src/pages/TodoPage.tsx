@@ -28,7 +28,7 @@ function Todo() {
     };
 
     //로컬에 넣기
-    localStorage.setItem(KEY, JSON.stringify([...localList, todoArray]));
+    createLocal(KEY, [...localList, todoArray]);
     //로컬 read
     readLocalTodoList();
     setEnterTodo("");

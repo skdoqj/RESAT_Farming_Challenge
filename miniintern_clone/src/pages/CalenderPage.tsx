@@ -129,7 +129,7 @@ function Calender() {
         value: inputMemo,
       };
       //로컬에 넣기
-      createLocal(memoArray);
+      createLocal(KEY, [...localList, memoArray]);
 
       //로컬 read
       readLocalMemoList();
@@ -137,14 +137,15 @@ function Calender() {
       setInputMemo("");
     }
   };
-  const createLocal = (array: {}) => {
-    localStorage.setItem(KEY, JSON.stringify([...localList, array]));
-  };
 
   const readLocalMemoList = () => {
     setLocalList(readLocal(KEY));
-
     console.log(localList);
+  };
+
+  const deleteLocalMemo = (key: number) => {
+    deleteLocal(KEY, localList, key);
+    readLocalMemoList();
   };
 
   useEffect(() => {
@@ -250,7 +251,12 @@ function Calender() {
                           <div className="memo_value">{v.value}</div>
                           <div className="btns">
                             <button className="btn modify_btn">수정</button>
-                            <button className="btn delete_btn">삭제</button>
+                            <button
+                              className="btn delete_btn"
+                              onClick={() => deleteLocalMemo(v.key)}
+                            >
+                              삭제
+                            </button>
                           </div>
                         </li>
                       </>
