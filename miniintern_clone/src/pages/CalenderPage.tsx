@@ -3,6 +3,12 @@ import CalenderBody from "../components/Calender/CalenderBody";
 import { useEffect, useState } from "react";
 import * as S from "../styles/calenderStyle";
 import * as T from "../types/calenderTypes";
+import {
+  createLocal,
+  readLocal,
+  updateLocal,
+  deleteLocal,
+} from "../components/Hooks/localModule";
 
 function Calender() {
   //오늘 날짜
@@ -123,27 +129,28 @@ function Calender() {
         value: inputMemo,
       };
       //로컬에 넣기
-      localStorage.setItem(KEY, JSON.stringify([...localList, memoArray]));
+      createLocal(memoArray);
 
-      //로컬 get
-      getLocalMemoList();
+      //로컬 read
+      readLocalMemoList();
       //input창 초기화
       setInputMemo("");
     }
   };
-  const getLocalMemoList = () => {
-    const value = localStorage.getItem(KEY);
-    if (typeof value === "string") {
-      const localTodoList = JSON.parse(value);
-      setLocalList(localTodoList);
-    }
+  const createLocal = (array: {}) => {
+    localStorage.setItem(KEY, JSON.stringify([...localList, array]));
+  };
+
+  const readLocalMemoList = () => {
+    setLocalList(readLocal(KEY));
+
     console.log(localList);
   };
 
   useEffect(() => {
     frontDays();
     makeCalender();
-    getLocalMemoList();
+    readLocalMemoList();
   }, [selectedMonth]);
 
   return (

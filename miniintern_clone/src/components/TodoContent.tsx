@@ -3,7 +3,7 @@ import * as S from "../styles/todoStyle";
 import { TodoPropsType } from "../types/todoTypes";
 const KEY = "todoList";
 
-function TodoContent({ todo, getLocalTodoList, localList }: TodoPropsType) {
+function TodoContent({ todo, readLocalTodoList, localList }: TodoPropsType) {
   const [modifying, setModifying] = useState(false);
   const [enterModifyTodo, setEnterModifyTodo] = useState("");
   const [importance, setImportance] = useState("");
@@ -12,7 +12,7 @@ function TodoContent({ todo, getLocalTodoList, localList }: TodoPropsType) {
   const deleteTodo = (key: number) => {
     const newList = localList.filter((v) => v.key !== key);
     localStorage.setItem(KEY, JSON.stringify(newList));
-    getLocalTodoList();
+    readLocalTodoList();
   };
 
   //수정
@@ -25,7 +25,7 @@ function TodoContent({ todo, getLocalTodoList, localList }: TodoPropsType) {
       v.key === key ? { ...v, value: enterModifyTodo, 중요도: importance } : v
     );
     localStorage.setItem(KEY, JSON.stringify(modifiedList));
-    getLocalTodoList();
+    readLocalTodoList();
     setModifying(false);
   };
 
@@ -35,7 +35,7 @@ function TodoContent({ todo, getLocalTodoList, localList }: TodoPropsType) {
       cheked: v.key === key ? !v.cheked : v.cheked,
     }));
     localStorage.setItem(KEY, JSON.stringify(checkedList));
-    getLocalTodoList();
+    readLocalTodoList();
     console.log(checkedList);
   };
 

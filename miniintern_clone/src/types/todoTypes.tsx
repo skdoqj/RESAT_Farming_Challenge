@@ -7,6 +7,6 @@ export interface TodoType {
 
 export interface TodoPropsType {
   todo: TodoType;
-  getLocalTodoList: () => void;
+  readLocalTodoList: () => void;
   localList: TodoType[];
 }

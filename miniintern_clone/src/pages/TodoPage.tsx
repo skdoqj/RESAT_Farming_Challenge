@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import * as S from "../styles/todoStyle";
 import { TodoType } from "../types/todoTypes";
 import TodoContent from "../components/TodoContent";
+import {
+  createLocal,
+  readLocal,
+  updateLocal,
+  deleteLocal,
+} from "../components/Hooks/localModule";
 
 const KEY = "todoList";
 
@@ -23,18 +29,14 @@ function Todo() {
 
     //로컬에 넣기
     localStorage.setItem(KEY, JSON.stringify([...localList, todoArray]));
-    //로컬 get
-    getLocalTodoList();
+    //로컬 read
+    readLocalTodoList();
     setEnterTodo("");
   };
 
-  const getLocalTodoList = () => {
-    const value = localStorage.getItem(KEY);
-    if (typeof value === "string") {
-      const localTodoList = JSON.parse(value);
-      setLocalList(localTodoList);
-    }
-    console.log("get", localList);
+  const readLocalTodoList = () => {
+    setLocalList(readLocal(KEY));
+    console.log(localList);
   };
 
   // 완료여부
@@ -48,7 +50,7 @@ function Todo() {
   }
 
   useEffect(() => {
-    getLocalTodoList();
+    readLocalTodoList();
     // localStorage.clear();
   }, []);
 
@@ -84,7 +86,7 @@ function Todo() {
               <TodoContent
                 todo={todo}
                 key={todo.key}
-                getLocalTodoList={getLocalTodoList}
+                readLocalTodoList={readLocalTodoList}
                 localList={localList}
               ></TodoContent>
             ))}
