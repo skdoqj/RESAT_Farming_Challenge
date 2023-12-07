@@ -7,6 +7,6 @@ export interface TodoType {
 
 export interface TodoPropsType {
   todo: TodoType;
-  readLocalTodoList: () => void;
-  localList: TodoType[];
+  localArray: TodoType[];
+  callAction: (action: string, key: number, updateValue?: {}) => void;
 }

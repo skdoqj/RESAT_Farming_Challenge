@@ -3,12 +3,7 @@ import CalenderBody from "../components/Calender/CalenderBody";
 import { useEffect, useState } from "react";
 import * as S from "../styles/calenderStyle";
 import * as T from "../types/calenderTypes";
-import {
-  createLocal,
-  readLocal,
-  updateLocal,
-  deleteLocal,
-} from "../components/Hooks/localModule";
+import { useLocal } from "../components/Hooks/localModule";
 
 function Calender() {
   //오늘 날짜
@@ -63,8 +58,6 @@ function Calender() {
     // setThisMonthArray(monthArry.dates);
   };
 
-  // console.log(monthArry);
-
   const moveMonth = (num: number) => {
     if (num == -1) {
       //이전 달
@@ -112,7 +105,22 @@ function Calender() {
   //메모
   const KEY = "calenderMemo";
   const [inputMemo, setInputMemo] = useState("");
-  const [localList, setLocalList] = useState<T.LocalType[]>([]);
+
+  //hook으로 보낼 state
+  const [action, setAction] = useState("");
+  const [inputValue, setInputValue] = useState({});
+  const [itemKey, setItemKey] = useState(0);
+
+  //hook
+  const [getLocalArray] = useLocal(KEY, action, inputValue, itemKey);
+
+  //수정
+  const [modifying, setModifying] = useState(false);
+  const [enterModifyValue, setEnterModifyValue] = useState("");
+
+  useEffect(() => {
+    setAction("read");
+  }, [action]);
 
   const activeEnterMemo = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (
@@ -128,30 +136,38 @@ function Calender() {
         date: selectedDate.date,
         value: inputMemo,
       };
-      //로컬에 넣기
-      createLocal(KEY, [...localList, memoArray]);
+      //create
+      setAction("create");
+      setInputValue(memoArray);
 
-      //로컬 read
-      readLocalMemoList();
       //input창 초기화
       setInputMemo("");
     }
   };
 
-  const readLocalMemoList = () => {
-    setLocalList(readLocal(KEY));
-    console.log(localList);
+  //delete
+  const deleteLocalMemo = (key: number) => {
+    setAction("delete");
+    setItemKey(key);
   };
 
-  const deleteLocalMemo = (key: number) => {
-    deleteLocal(KEY, localList, key);
-    readLocalMemoList();
+  //update
+  const updateMemo = (value: string) => {
+    setModifying(true);
+    setEnterModifyValue(value);
+  };
+  const modifyingDone = (key: number) => {
+    setModifying(false);
+    const modifiedArray = getLocalArray.map((v) =>
+      v.key === key ? { ...v, value: enterModifyValue } : v
+    );
+    setAction("update");
+    setInputValue(modifiedArray);
   };
 
   useEffect(() => {
     frontDays();
     makeCalender();
-    readLocalMemoList();
   }, [selectedMonth]);
 
   return (
@@ -176,7 +192,9 @@ function Calender() {
           <div className="date_container">
             {WEEKDAY.map((v) => (
               <div className="date_box week_box">
-                <span className="week">{v}</span>
+                <span className="week" key={v}>
+                  {v}
+                </span>
               </div>
             ))}
 
@@ -205,7 +223,7 @@ function Calender() {
                   <CalenderDate
                     key={v.date}
                     date={v.date}
-                    localList={localList}
+                    localList={getLocalArray}
                     selectedYear={selectedYear}
                     selectedMonth={selectedMonth}
                   ></CalenderDate>
@@ -240,7 +258,7 @@ function Calender() {
 
             <div className="memo_wrapper">
               <ul>
-                {localList.map(
+                {getLocalArray.map(
                   (v) =>
                     v.year == selectedYear &&
                     v.month == selectedMonth &&
@@ -248,16 +266,38 @@ function Calender() {
                       <>
                         <li key={v.key}>
                           <div className="memo_point"></div>
-                          <div className="memo_value">{v.value}</div>
-                          <div className="btns">
-                            <button className="btn modify_btn">수정</button>
-                            <button
-                              className="btn delete_btn"
-                              onClick={() => deleteLocalMemo(v.key)}
-                            >
-                              삭제
-                            </button>
-                          </div>
+                          {modifying ? (
+                            <>
+                              <input
+                                type="text"
+                                value={enterModifyValue}
+                                onChange={(e) =>
+                                  setEnterModifyValue(e.target.value)
+                                }
+                              />
+                              <button onClick={() => modifyingDone(v.key)}>
+                                수정완료
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              <div className="memo_value">{v.value}</div>
+                              <div className="btns">
+                                <button
+                                  className="btn modify_btn"
+                                  onClick={() => updateMemo(v.value)}
+                                >
+                                  수정
+                                </button>
+                                <button
+                                  className="btn delete_btn"
+                                  onClick={() => deleteLocalMemo(v.key)}
+                                >
+                                  삭제
+                                </button>
+                              </div>
+                            </>
+                          )}
                         </li>
                       </>
                     )

@@ -2,23 +2,39 @@ import { useEffect, useState } from "react";
 import * as S from "../styles/todoStyle";
 import { TodoType } from "../types/todoTypes";
 import TodoContent from "../components/TodoContent";
-import {
-  createLocal,
-  readLocal,
-  updateLocal,
-  deleteLocal,
-} from "../components/Hooks/localModule";
+import { useLocal } from "../components/Hooks/localModule";
 
 const KEY = "todoList";
 
 function Todo() {
   const [enterTodo, setEnterTodo] = useState("");
   const [importance, setImportance] = useState("");
-  const [localList, setLocalList] = useState<TodoType[]>([]);
   const [check, setCheck] = useState<null | boolean>();
 
+  //hook으로 보낼 state
+  const [action, setAction] = useState("");
+  const [inputValue, setInputValue] = useState({});
+  const [itemKey, setItemKey] = useState(0);
+
+  //hook
+  const [getLocalArray] = useLocal(KEY, action, inputValue, itemKey);
+
+  useEffect(() => {
+    setAction("read");
+  }, [action]);
+
+  const callAction = (action: string, key: number, updateValue?: {}) => {
+    if (updateValue) {
+      setAction(action);
+      setItemKey(key);
+      setInputValue(updateValue);
+    } else {
+      setAction(action);
+      setItemKey(key);
+    }
+  };
+
   const createTodo = () => {
-    console.log("입력값", enterTodo);
     if (enterTodo === "") return alert("할 일을 입력해주세요");
     const todoArray: TodoType = {
       key: Math.random(),
@@ -27,32 +43,22 @@ function Todo() {
       cheked: false,
     };
 
-    //로컬에 넣기
-    createLocal(KEY, [...localList, todoArray]);
-    //로컬 read
-    readLocalTodoList();
+    //create
+    setAction("create");
+    setInputValue(todoArray);
+
     setEnterTodo("");
   };
 
-  const readLocalTodoList = () => {
-    setLocalList(readLocal(KEY));
-    console.log(localList);
-  };
-
-  // 완료여부
+  // 완료여부;
   let TodoList: TodoType[];
   if (check === true) {
-    TodoList = localList.filter((v) => v.cheked === true);
+    TodoList = getLocalArray.filter((v) => v.cheked === true);
   } else if (check === false) {
-    TodoList = localList.filter((v) => v.cheked === false);
+    TodoList = getLocalArray.filter((v) => v.cheked === false);
   } else {
-    TodoList = localList;
+    TodoList = getLocalArray;
   }
-
-  useEffect(() => {
-    readLocalTodoList();
-    // localStorage.clear();
-  }, []);
 
   return (
     <S.TodoForm>
@@ -86,8 +92,8 @@ function Todo() {
               <TodoContent
                 todo={todo}
                 key={todo.key}
-                readLocalTodoList={readLocalTodoList}
-                localList={localList}
+                localArray={getLocalArray}
+                callAction={callAction}
               ></TodoContent>
             ))}
           </ul>

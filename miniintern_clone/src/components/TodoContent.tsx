@@ -1,18 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as S from "../styles/todoStyle";
 import { TodoPropsType } from "../types/todoTypes";
-const KEY = "todoList";
+import { useLocal } from "../components/Hooks/localModule";
 
-function TodoContent({ todo, readLocalTodoList, localList }: TodoPropsType) {
+function TodoContent({ todo, localArray, callAction }: TodoPropsType) {
   const [modifying, setModifying] = useState(false);
   const [enterModifyTodo, setEnterModifyTodo] = useState("");
   const [importance, setImportance] = useState("");
 
   //삭제
-  const deleteTodo = (key: number) => {
-    const newList = localList.filter((v) => v.key !== key);
-    localStorage.setItem(KEY, JSON.stringify(newList));
-    readLocalTodoList();
+  const deleteTodo = () => {
+    callAction("delete", todo.key);
   };
 
   //수정
@@ -21,22 +19,19 @@ function TodoContent({ todo, readLocalTodoList, localList }: TodoPropsType) {
     setEnterModifyTodo(value);
   };
   const modifyingDone = (key: number) => {
-    const modifiedList = localList.map((v) =>
+    const modifiedList = localArray.map((v) =>
       v.key === key ? { ...v, value: enterModifyTodo, 중요도: importance } : v
     );
-    localStorage.setItem(KEY, JSON.stringify(modifiedList));
-    readLocalTodoList();
+    callAction("update", todo.key, modifiedList);
     setModifying(false);
   };
 
   const onCheck = (key: number) => {
-    const checkedList = localList.map((v) => ({
+    const checkedList = localArray.map((v) => ({
       ...v,
       cheked: v.key === key ? !v.cheked : v.cheked,
     }));
-    localStorage.setItem(KEY, JSON.stringify(checkedList));
-    readLocalTodoList();
-    console.log(checkedList);
+    callAction("update", todo.key, checkedList);
   };
 
   return (
@@ -75,7 +70,7 @@ function TodoContent({ todo, readLocalTodoList, localList }: TodoPropsType) {
                 <span>{todo.중요도}</span>
                 <div className="ud">
                   <button onClick={() => modifyTodo(todo.value)}>수정</button>
-                  <button onClick={() => deleteTodo(todo.key)}>삭제</button>
+                  <button onClick={deleteTodo}>삭제</button>
                 </div>
               </div>
             </>
