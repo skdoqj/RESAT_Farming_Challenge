@@ -3,7 +3,7 @@ import CalenderBody from "../components/Calender/CalenderBody";
 import { useEffect, useState } from "react";
 import * as S from "../styles/calenderStyle";
 import * as T from "../types/calenderTypes";
-import { useLocal } from "../components/Hooks/localModule";
+import { useLocal } from "../components/Hooks/useLocal";
 
 function Calender() {
   //오늘 날짜

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as S from "../styles/todoStyle";
 import { TodoType } from "../types/todoTypes";
 import TodoContent from "../components/TodoContent";
-import { useLocal } from "../components/Hooks/localModule";
+import { useLocal } from "../components/Hooks/useLocal";
 
 const KEY = "todoList";
 

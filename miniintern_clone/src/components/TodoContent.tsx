@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import * as S from "../styles/todoStyle";
 import { TodoPropsType } from "../types/todoTypes";
-import { useLocal } from "../components/Hooks/localModule";
 
 function TodoContent({ todo, localArray, callAction }: TodoPropsType) {
   const [modifying, setModifying] = useState(false);
