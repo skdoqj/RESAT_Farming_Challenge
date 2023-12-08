@@ -181,9 +181,15 @@ function Calender() {
           </div>
 
           <div className="move_month_btn">
-            <button onClick={() => moveMonth(-1)}>전 달</button>
-            <button onClick={() => moveMonth(0)}>오늘</button>
-            <button onClick={() => moveMonth(+1)}>다음 달</button>
+            <button className="default_btn" onClick={() => moveMonth(-1)}>
+              전 달
+            </button>
+            <button className="default_btn" onClick={() => moveMonth(0)}>
+              오늘
+            </button>
+            <button className="default_btn" onClick={() => moveMonth(+1)}>
+              다음 달
+            </button>
           </div>
         </div>
         <div className="calender_body">
@@ -240,7 +246,7 @@ function Calender() {
         <S.Modal className="modal">
           <div className="overlay"></div>
           <div className="madal_content">
-            <button onClick={toggleModal} className="close_btn">
+            <button onClick={toggleModal} className="default_btn close_btn">
               닫기
             </button>
             <div className="date_info">
@@ -251,6 +257,7 @@ function Calender() {
             <label>새 이벤트 생성</label>
             <input
               type="text"
+              className="default_input"
               onChange={(e) => setInputMemo(e.target.value)}
               onKeyDown={(e) => activeEnterMemo(e)}
               value={inputMemo}
@@ -271,11 +278,15 @@ function Calender() {
                               <input
                                 type="text"
                                 value={enterModifyValue}
+                                className="default_input"
                                 onChange={(e) =>
                                   setEnterModifyValue(e.target.value)
                                 }
                               />
-                              <button onClick={() => modifyingDone(v.key)}>
+                              <button
+                                className="default_btn"
+                                onClick={() => modifyingDone(v.key)}
+                              >
                                 수정완료
                               </button>
                             </>
@@ -284,13 +295,13 @@ function Calender() {
                               <div className="memo_value">{v.value}</div>
                               <div className="btns">
                                 <button
-                                  className="btn modify_btn"
+                                  className="default_btn modify_btn"
                                   onClick={() => updateMemo(v.value)}
                                 >
                                   수정
                                 </button>
                                 <button
-                                  className="btn delete_btn"
+                                  className="default_btn delete_btn"
                                   onClick={() => deleteLocalMemo(v.key)}
                                 >
                                   삭제

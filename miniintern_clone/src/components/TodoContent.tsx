@@ -36,18 +36,18 @@ function TodoContent({ todo, localArray, callAction }: TodoPropsType) {
   return (
     <>
       <li key={todo.key} className="todo_content">
-        <div>
-          <input
-            type="checkbox"
-            checked={todo.cheked}
-            onChange={() => onCheck(todo.key)}
-          ></input>
-
+        <input
+          type="checkbox"
+          checked={todo.cheked}
+          onChange={() => onCheck(todo.key)}
+        ></input>
+        <div className="txt_wrapper">
           {modifying ? (
             <>
               <input
                 type="text"
                 value={enterModifyTodo}
+                className="default_input"
                 onChange={(e) => setEnterModifyTodo(e.target.value)}
               ></input>
               <select
@@ -60,17 +60,29 @@ function TodoContent({ todo, localArray, callAction }: TodoPropsType) {
                 <option value="높음">높음</option>
                 <option value="아주높음">아주높음</option>
               </select>
-              <button onClick={() => modifyingDone(todo.key)}>수정완료</button>
+              <button
+                className="default_btn"
+                onClick={() => modifyingDone(todo.key)}
+              >
+                수정완료
+              </button>
             </>
           ) : (
             <>
-              <div>
+              <div className="todo_txt">
                 <span>{todo.value}</span>
                 <span>{todo.중요도}</span>
-                <div className="ud">
-                  <button onClick={() => modifyTodo(todo.value)}>수정</button>
-                  <button onClick={deleteTodo}>삭제</button>
-                </div>
+              </div>
+              <div className="btns">
+                <button
+                  className="default_btn"
+                  onClick={() => modifyTodo(todo.value)}
+                >
+                  수정
+                </button>
+                <button className="default_btn" onClick={deleteTodo}>
+                  삭제
+                </button>
               </div>
             </>
           )}

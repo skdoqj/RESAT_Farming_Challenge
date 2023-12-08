@@ -18,14 +18,6 @@ export const Calender = styled.div`
     }
     .move_month_btn {
       margin: auto 0;
-      button {
-        font-size: 14px;
-        background-color: white;
-        margin-left: 10px;
-        padding: 3px 5px;
-        border: 1px solid ${grayColor};
-        border-radius: 5px;
-      }
     }
   }
 
@@ -46,24 +38,25 @@ export const Calender = styled.div`
       height: 60px;
       width: 100%;
       display: flex;
-      /* justify-content: center; */
-      /* padding-top: 10px; */
       align-items: center;
       flex-direction: column;
-      /* border: 1px solid ${grayColor}; */
+
       .date,
       .week {
         padding-top: 20px;
       }
       //선택 날짜
       .slected_date {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: white;
         position: relative;
         .selected_point {
           z-index: -1;
           position: absolute;
           top: 10px;
-          left: -10px;
+          /* left: -10px; */
           width: 37px;
           height: 37px;
           background-color: ${themeColor};
@@ -131,10 +124,6 @@ export const Modal = styled.div`
     label {
       margin-right: 10px;
     }
-    input {
-      border: 1px solid ${grayColor};
-      padding-left: 2px;
-    }
 
     .memo_wrapper {
       margin-top: 20px;
@@ -157,13 +146,6 @@ export const Modal = styled.div`
         .btns {
           right: 10px;
           margin-left: auto;
-          .btn {
-            margin-left: 10px;
-            background-color: white;
-            padding: 3px 5px;
-            border: 1px solid ${grayColor};
-            border-radius: 5px;
-          }
         }
       }
     }

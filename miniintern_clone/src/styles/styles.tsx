@@ -1,5 +1,6 @@
 import { createGlobalStyle, styled } from "styled-components";
 const themeColor = "rgb(23, 161, 255)";
+const grayColor = "#cccccc";
 
 export const GlobalStyle = createGlobalStyle`
 * {
@@ -20,6 +21,23 @@ a {
 li{
     list-style: none;
 }
+.default_btn {
+    font-size: 14px;
+    background-color: white;
+    margin-left: 10px;
+    padding: 3px 5px;
+    border: 1px solid ${grayColor};
+    border-radius: 5px;
+}
+.default_input {
+      margin-left: 10px;
+      border: none;
+      border-bottom: 1px solid ${grayColor};
+      height: 30px;
+      width: 200px;
+      text-indent: 10px;
+      outline: none;
+    }
 `;
 export const Wrapper = styled.div`
   min-height: calc(100vh - 10rem);

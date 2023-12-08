@@ -65,9 +65,15 @@ function Todo() {
       <div className="todo_page">
         <h1>ToDo List</h1>
         <div className="option">
-          <button onClick={() => setCheck(null)}>전체</button>
-          <button onClick={() => setCheck(true)}>해결</button>
-          <button onClick={() => setCheck(false)}>미해결</button>
+          <button className="default_btn" onClick={() => setCheck(null)}>
+            전체
+          </button>
+          <button className="default_btn" onClick={() => setCheck(true)}>
+            해결
+          </button>
+          <button className="default_btn" onClick={() => setCheck(false)}>
+            미해결
+          </button>
         </div>
         <div className="input_array">
           <label>할 일을 입력하세요</label>
@@ -75,7 +81,7 @@ function Todo() {
             type="text"
             onChange={(e) => setEnterTodo(e.target.value)}
             value={enterTodo}
-            className="todo_enter"
+            className="todo_enter default_input"
           ></input>
           <select name="중요도" onChange={(e) => setImportance(e.target.value)}>
             <option value="">중요도</option>
@@ -84,7 +90,9 @@ function Todo() {
             <option value="높음">높음</option>
             <option value="아주높음">아주높음</option>
           </select>
-          <button onClick={createTodo}>추가</button>
+          <button className="default_btn" onClick={createTodo}>
+            추가
+          </button>
         </div>
         <S.Todo>
           <ul className="todo_list">

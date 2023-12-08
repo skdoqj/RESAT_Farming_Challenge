@@ -29,19 +29,21 @@ function Timer() {
   let realSec = seconds + minSec + hourSec;
 
   let intervalID: any = useRef();
-  console.log(intervalID);
 
   //카운트 다운 함수
   const startClick = () => {
-    clearInterval(intervalID.current);
-    // setTime({ ...time, hour: hhour });
-    intervalID.current = setInterval(operatorTimer, 1000);
-    setLock(true);
+    if (hour === 0 && minute == 0 && seconds == 0) {
+      alert("시간을 설정해주세요");
+    } else {
+      clearInterval(intervalID.current);
+      intervalID.current = setInterval(operatorTimer, 1000);
+      setLock(true);
+    }
   };
 
   const operatorTimer = () => {
     realSec--;
-    console.log(realSec);
+
     let realHour = Math.floor(realSec / 3600);
     let realMin = Math.floor((realSec - realHour * 3600) / 60);
     let realSeconds = realSec - realHour * 3600 - realMin * 60;
@@ -51,7 +53,6 @@ function Timer() {
       clearInterval(intervalID.current);
     }
   };
-  console.log(time);
 
   const stopClick = () => {
     console.log("stop");
@@ -66,44 +67,53 @@ function Timer() {
   };
 
   return (
-    <>
+    <S.Timer>
       <h1>Count Down Timer</h1>
-      {lock === true ? (
-        <>
-          <span>{time.hour} :</span>
-          <span>{time.minute} : </span>
-          <span>{time.seconds}</span>
-        </>
-      ) : (
-        <>
-          <input
-            onChange={hourChange}
-            type="number"
-            id="hour"
-            placeholder="00"
-          ></input>
-          <input
-            onChange={minuteChange}
-            type="number"
-            id="minute"
-            placeholder="00"
-          ></input>
-          <input
-            onChange={secondsChange}
-            type="number"
-            id="seconds"
-            placeholder="00"
-          ></input>
-        </>
-      )}
+      <div className="timer">
+        <div className="number_area">
+          {lock === true ? (
+            <div className="numbers">
+              <span>{time.hour} :</span>
+              <span>{time.minute} : </span>
+              <span>{time.seconds}</span>
+            </div>
+          ) : (
+            <>
+              <input
+                onChange={hourChange}
+                type="number"
+                id="hour"
+                placeholder="00"
+              ></input>
+              <input
+                onChange={minuteChange}
+                type="number"
+                id="minute"
+                placeholder="00"
+              ></input>
+              <input
+                onChange={secondsChange}
+                type="number"
+                id="seconds"
+                placeholder="00"
+              ></input>
+            </>
+          )}
+        </div>
 
-      <div>
-        <button onClick={startClick}>start</button>
-        <button onClick={stopClick}>STOP</button>
-        <button onClick={resetClick}>RESET</button>
-        <div></div>
+        <div className="btn_area">
+          <button className="default_btn" onClick={startClick}>
+            START
+          </button>
+          <button className="default_btn" onClick={stopClick}>
+            STOP
+          </button>
+          <button className="default_btn" onClick={resetClick}>
+            RESET
+          </button>
+        </div>
       </div>
-    </>
+    </S.Timer>
   );
 }
 export default Timer;
